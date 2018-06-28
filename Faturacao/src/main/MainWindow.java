@@ -353,9 +353,9 @@ public class MainWindow extends JFrame implements EventListener {
 					Buttons.get(line[0]).setEnabled(true);	
 				}else {
 					
-					//NameList.put(null, null);
-					//PriceList.put(null, null);
-					//NamePriceList.put(null, null);
+					NameList.put("", "");
+					PriceList.put("", 0.0f);
+					NamePriceList.put("", 0.0f);
 					
 				}
 			}
