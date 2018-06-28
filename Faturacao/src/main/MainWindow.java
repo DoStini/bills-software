@@ -298,7 +298,6 @@ public class MainWindow extends JFrame implements EventListener {
 	}
 		
 	public void LoadDatabase() throws IOException {
-		System.out.println(Paths.get("").toAbsolutePath());
 		
 		Map<String, JButton> Buttons = new HashMap<String, JButton>();
 		Buttons.clear();
@@ -321,7 +320,7 @@ public class MainWindow extends JFrame implements EventListener {
 		Buttons.put("btnBar_15", btnBar_15);
 		Buttons.put("btnBar_16", btnBar_16);
 		Buttons.put("btnBar_17", btnBar_17);
-		//KEEP ADDING: USE NOTEPAD TO REPLACE BAR WITH KITCHEN...
+		//KEEP ADDING: USE NOTEPAD TO REPLACE BAR WITgH KITCHEN...
 		String[] line;
 		Path path = Paths.get("Resources", "DailyDB.txt");
 		line = null;
@@ -345,56 +344,23 @@ public class MainWindow extends JFrame implements EventListener {
 			List<String> lines = Files.readAllLines(path);
 			
 			for (int x = 0; x < lines.size(); x++) {
+				if(lines.get(x) != "_") {
 					line = lines.get(x).split("/");
-					
 					NameList.put(line[0], line[1]);
 					PriceList.put(line[0], Float.parseFloat(line[2]));
 					NamePriceList.put(line[1], Float.parseFloat(line[2]));
 					Buttons.get(line[0]).setText("<html>" + line[1] + "<br>" + line[2].toString() + euro);
-					Buttons.get(line[0]).setEnabled(true);
+					Buttons.get(line[0]).setEnabled(true);	
+				}else {
+					
+					//NameList.put(null, null);
+					//PriceList.put(null, null);
+					//NamePriceList.put(null, null);
+					
+				}
 			}
 		} finally {
 		}
-
-		JOptionPane.showMessageDialog(contentPanel, "good");
-		
-		/*
-		path = MainWindow.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		path = path.substring(1, path.length() - path.split("/")[path.split("/").length - 1].length());
-        System.out.println(path);
-        System.out.println(path);
-        System.out.println(path);
-		
-		InputStream dailyDataBase = 
-		Scanner scDailyDataBase = new Scanner(dailyDataBase);	
-		String[] line = null;
-		if(scDailyDataBase.hasNextLine()) DailyCartValue = Float.parseFloat(scDailyDataBase.nextLine());
-		while(scDailyDataBase.hasNext()) {
-			line = scDailyDataBase.nextLine().split("/");
-			DailyCart.put(line[0], Integer.parseInt(line[1]));
-		}
-		
-		scDailyDataBase.close();
-		
-		NameList.clear();
-		PriceList.clear();
-		line = null;
-		
-		InputStream dataBase = MainWindow.class.getResourceAsStream(path + "Resources/DB.txt");
-		System.out.println(dataBase);
-		Scanner scdataBase = new Scanner(dataBase);	
-
-		while (scdataBase.hasNextLine()) 	
-		{
-			line = scdataBase.nextLine().split("/");
-			NameList.put(line[0], line[1]);
-			PriceList.put(line[0], Float.parseFloat(line[2]));
-			NamePriceList.put(line[1], Float.parseFloat(line[2]));
-			Buttons.get(line[0]).setText("<html>" + line[1] + "<br>" + line[2].toString() + euro);
-			Buttons.get(line[0]).setEnabled(true);
-			 
-		}
-		scdataBase.close();	*/	
 	}
 	
 	private void initComponents() {
