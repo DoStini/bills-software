@@ -96,7 +96,9 @@ public class MainWindow extends JFrame implements EventListener {
 	public Map<String, String> NameList = new HashMap<String, String>(); // btn id -> Name
 	public Map<String, Float> PriceList = new HashMap<String, Float>(); // btn id -> Price
 	public Map<String, Float> NamePriceList = new HashMap<String, Float>();
-
+	
+	public Map<String, Float> ManualPriceList = new HashMap<String, Float>();
+	
 	public String euro = "\u20ac";
 	public JPanel contentPanel;
 
@@ -166,11 +168,13 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton btnKitchen_18;
 
 	public JLabel labelPrice;
-	private JButton btnOpenDaily;
-	private JButton btnEndDay;
-	private JButton TotalBtn;
-
+	public JButton btnOpenDaily;
+	public JButton btnEndDay;
+	public JButton TotalBtn;
+	public JButton btnCleanCart;
+	
 	public String path;
+
 
 	/**
 	 * Launch the application.
@@ -208,22 +212,10 @@ public class MainWindow extends JFrame implements EventListener {
 	private void eventHandler() {
 		TotalList.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent evt) {
+			public void mouseClicked(MouseEvent evt) { //REMOVE ITEM
 				if (evt.getClickCount() == 2) {
 					int index = TotalList.getSelectedIndex();
-					String value = ModelTotal.getElementAt(index).split(" X")[0];// Word to be removed
-
-					if (JOptionPane.showConfirmDialog(contentPanel, "Remover item: " + value + "?", "",
-							JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-						if (ShoppingCart.get(value) == 1) {
-							ShoppingCart.remove(value);
-						} else {
-							ShoppingCart.put(value, ShoppingCart.get(value) - 1);
-						}
-						ShoppingCartValue -= NamePriceList.get(value);
-						ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
-						UpdateCartVisual();
-					}
+					RemoveFromCart(index);
 				}
 			}
 		});
@@ -234,7 +226,15 @@ public class MainWindow extends JFrame implements EventListener {
 				Total();
 			}
 		});
-
+		
+		btnCleanCart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShoppingCartValue = 0.0f;
+				ShoppingCart.clear();
+				UpdateCartVisual();
+			}
+		});
+		
 		btnEndDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (JOptionPane.showConfirmDialog(contentPanel,
@@ -260,7 +260,12 @@ public class MainWindow extends JFrame implements EventListener {
 		btnManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String price = JOptionPane.showInputDialog(contentPanel, "Preco:", "Manual");
-				AddToCart("Manual", Float.parseFloat(price));
+				try {
+					AddToCartManual("Manual", Float.parseFloat(price));
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(contentPanel, "O valor que introduziu não é válido: \n	-Certifique-se que usa apenas números\n	-Certifique-se que usa '.' e não ','", "Erro", JOptionPane.OK_OPTION); 
+			    }  
+				
 			}
 		});
 
@@ -326,7 +331,7 @@ public class MainWindow extends JFrame implements EventListener {
 		});
 		btnBar_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddToCart(NameList.get("btnBar_11"), PriceList.get("btnBar_3"));
+				AddToCart(NameList.get("btnBar_11"), PriceList.get("btnBar_11"));
 			}
 		});
 		btnBar_12.addActionListener(new ActionListener() {
@@ -360,6 +365,108 @@ public class MainWindow extends JFrame implements EventListener {
 			}
 		});
 
+		
+		btnSnack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack"), PriceList.get("btnSnack"));
+			}
+		});
+		btnSnack_0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_0"), PriceList.get("btnSnack_0"));
+			}
+		});
+		btnSnack_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_1"), PriceList.get("btnSnack_1"));
+			}
+		});
+		btnSnack_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_2"), PriceList.get("btnSnack_2"));
+			}
+		});
+		btnSnack_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_3"), PriceList.get("btnSnack_3"));
+			}
+		});
+		btnSnack_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_4"), PriceList.get("btnSnack_4"));
+			}
+		});
+		btnSnack_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_5"), PriceList.get("btnSnack_5"));
+			}
+		});
+		btnSnack_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_6"), PriceList.get("btnSnack_6"));
+			}
+		});
+		btnSnack_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_7"), PriceList.get("btnSnack_7"));
+			}
+		});
+		btnSnack_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_8"), PriceList.get("btnSnack_8"));
+			}
+		});
+		btnSnack_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_9"), PriceList.get("btnSnack_9"));
+			}
+		});
+		btnSnack_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_10"), PriceList.get("btnSnack_10"));
+			}
+		});
+		btnSnack_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_11"), PriceList.get("btnSnack_11"));
+			}
+		});
+		btnSnack_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_12"), PriceList.get("btnSnack_12"));
+			}
+		});
+		btnSnack_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_13"), PriceList.get("btnSnack_13"));
+			}
+		});
+		btnSnack_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_14"), PriceList.get("btnSnack_14"));
+			}
+		});
+		btnSnack_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_15"), PriceList.get("btnSnack_15"));
+			}
+		});
+		btnSnack_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_16"), PriceList.get("btnSnack_16"));
+			}
+		});
+		btnSnack_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_17"), PriceList.get("btnSnack_17"));
+			}
+		});
+		btnSnack_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnSnack_18"), PriceList.get("btnSnack_18"));
+			}
+		});
+		
 		btnKitchen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddToCart(NameList.get("btnKitchen"), PriceList.get("btnKitchen"));
@@ -422,7 +529,7 @@ public class MainWindow extends JFrame implements EventListener {
 		});
 		btnKitchen_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddToCart(NameList.get("btnKitchen_11"), PriceList.get("btnKitchen_3"));
+				AddToCart(NameList.get("btnKitchen_11"), PriceList.get("btnKitchen_11"));
 			}
 		});
 		btnKitchen_12.addActionListener(new ActionListener() {
@@ -964,27 +1071,44 @@ public class MainWindow extends JFrame implements EventListener {
 		btnOpenDaily = new JButton("Di\u00E1rio");
 
 		btnEndDay = new JButton("Fechar Sess\u00E3o");
+		
+		btnCleanCart = new JButton("Limpar Carrinho");
 
 		GroupLayout gl_BackScrollPanel = new GroupLayout(BackScrollPanel);
-		gl_BackScrollPanel.setHorizontalGroup(gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_BackScrollPanel.createSequentialGroup().addContainerGap().addGroup(gl_BackScrollPanel
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_BackScrollPanel.createSequentialGroup()
-								.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 73, Short.MAX_VALUE).addGap(18)
-								.addComponent(btnEndDay, GroupLayout.PREFERRED_SIZE, 73, Short.MAX_VALUE).addGap(5))
-						.addComponent(TotalScroll, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-						.addGroup(gl_BackScrollPanel.createSequentialGroup()
+		gl_BackScrollPanel.setHorizontalGroup(
+			gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_BackScrollPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_BackScrollPanel.createSequentialGroup()
+								.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
+								.addGap(18)
+								.addComponent(btnEndDay, GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
+								.addGap(5))
+							.addComponent(TotalScroll, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+							.addGroup(gl_BackScrollPanel.createSequentialGroup()
 								.addComponent(labelPrice, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-								.addGap(10)))));
-		gl_BackScrollPanel.setVerticalGroup(gl_BackScrollPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_BackScrollPanel.createSequentialGroup().addContainerGap()
-						.addComponent(labelPrice, GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE).addGap(8)
-						.addComponent(TotalScroll, GroupLayout.PREFERRED_SIZE, 812, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnOpenDaily, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE).addComponent(
-										btnEndDay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap()));
+								.addContainerGap()))
+						.addGroup(Alignment.TRAILING, gl_BackScrollPanel.createSequentialGroup()
+							.addComponent(btnCleanCart, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+							.addGap(87))))
+		);
+		gl_BackScrollPanel.setVerticalGroup(
+			gl_BackScrollPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_BackScrollPanel.createSequentialGroup()
+					.addGap(9)
+					.addComponent(btnCleanCart)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(labelPrice, GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(TotalScroll, GroupLayout.PREFERRED_SIZE, 812, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnOpenDaily, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+						.addComponent(btnEndDay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
+		);
 
 		TotalList = new JList();
 		TotalList.setBorder(null);
@@ -1010,7 +1134,7 @@ public class MainWindow extends JFrame implements EventListener {
 				btnBar_17, btnManual, TotalPanel, BackScrollPanel, TotalScroll, TotalList, TotalBtn }));
 
 	}
-
+	
 	private void AddToCart(String name, Float price) {
 		if (!ShoppingCart.containsKey(name)) {
 			ShoppingCart.put(name, 1);
@@ -1022,12 +1146,47 @@ public class MainWindow extends JFrame implements EventListener {
 		ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
 		UpdateCartVisual();
 	}
+	
+	private void AddToCartManual(String name, Float price) {
+		if (!ShoppingCart.containsKey(name + " "+ price.toString() + euro)) {
+			ShoppingCart.put(name + " "+ price.toString() + euro, 1);
+			ManualPriceList.put(name + " "+ price.toString() + euro, price);
+			ShoppingCartValue += price;
+		} else {
+			ShoppingCart.put(name + " "+ price.toString() + euro, ShoppingCart.get(name + " "+ price.toString() + euro) + 1);
+			ShoppingCartValue += price;
+		}
+		ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+		UpdateCartVisual();
+	}
 
+	private void RemoveFromCart(int index) {
+		String item = ModelTotal.getElementAt(index).split(" X")[0];// Word to be removed
+
+		if (JOptionPane.showConfirmDialog(contentPanel, "Remover item: " + item + "?", "",
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			if (NamePriceList.containsKey(item)) {
+				ShoppingCartValue -= NamePriceList.get(item);
+			} else {
+				ShoppingCartValue -= ManualPriceList.get(item);
+			}
+			
+			if (ShoppingCart.get(item) == 1) {
+				ShoppingCart.remove(item);
+			} else {
+				ShoppingCart.put(item, ShoppingCart.get(item) - 1);
+			}
+
+			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+			UpdateCartVisual();
+		}
+	}
+	
 	private void Total() {
 		for (Object key : ShoppingCart.keySet()) {
 			if (!DailyCart.containsKey(key)) {
 				DailyCart.put(key.toString(), ShoppingCart.get(key));
-			} else {
+			} else{
 				DailyCart.put(key.toString(), DailyCart.get(key) + ShoppingCart.get(key));
 			}
 		}
