@@ -64,6 +64,7 @@ import java.awt.Button;
 import javax.swing.JTextArea;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.AbstractListModel;
 import javax.swing.JScrollBar;
 import java.awt.Choice;
@@ -78,6 +79,28 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import java.awt.Graphics;
+
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.util.ArrayList;
+import java.util.List;
+ 
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import java.awt.print.PrinterJob;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+
 
 public class MainWindow extends JFrame implements EventListener {
 
@@ -175,6 +198,9 @@ public class MainWindow extends JFrame implements EventListener {
 	
 	public String path;
 
+	
+	private PrintService printer;
+	
 
 	/**
 	 * Launch the application.
@@ -189,10 +215,10 @@ public class MainWindow extends JFrame implements EventListener {
 			public void run() {
 				try {
 					MainWindow frame = new MainWindow();
-					// frame.setUndecorated(true);
-					frame.setAlwaysOnTop(true);
-					// frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					// frame.setResizable(false);
+					//frame.setUndecorated(true);
+					//frame.setAlwaysOnTop(true);
+					//frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					//frame.setResizable(false);
 					frame.setVisible(true);
 
 				} catch (Exception e) {
@@ -206,6 +232,7 @@ public class MainWindow extends JFrame implements EventListener {
 		priceFormat = new DecimalFormat("#.#");
 		initComponents();
 		LoadDatabase();
+		PrinterSetup();
 		eventHandler();
 	}
 
@@ -662,16 +689,13 @@ public class MainWindow extends JFrame implements EventListener {
 
 			for (int x = 0; x < lines.size(); x++) {
 				if (!lines.get(x).equals("NULL")) {
-					System.out.println(lines.get(x));
 					line = lines.get(x).split("/");
-					System.out.println("Works " + line[0] + "\n");
 					NameList.put(line[0], line[1]);
 					PriceList.put(line[0], Float.parseFloat(line[2]));
 					NamePriceList.put(line[1], Float.parseFloat(line[2]));
 					Buttons.get(line[0]).setText("<html>" + line[1] + "<br>" + line[2].toString() + euro);
 					Buttons.get(line[0]).setEnabled(true);
 				} else {
-					System.out.println("Skips");
 					NameList.put("", "");
 					PriceList.put("", 0.0f);
 					NamePriceList.put("", 0.0f);
@@ -1135,6 +1159,19 @@ public class MainWindow extends JFrame implements EventListener {
 
 	}
 	
+	private void PrinterSetup() {
+		
+		
+		PrintService[] printers = PrinterJob.lookupPrintServices();
+        for (int x = 0; x < printers.length; x++) {
+        	System.out.println(printers[x]);
+            if (printers[x].getName().toLowerCase().indexOf("Two Pilots Demo Printer".toLowerCase()) >= 0) {
+            	System.out.println("Good");
+                printer = printers[x];
+            }
+        }
+	}
+	
 	private void AddToCart(String name, Float price) {
 		if (!ShoppingCart.containsKey(name)) {
 			ShoppingCart.put(name, 1);
@@ -1183,36 +1220,42 @@ public class MainWindow extends JFrame implements EventListener {
 	}
 	
 	private void Total() {
-		for (Object key : ShoppingCart.keySet()) {
-			if (!DailyCart.containsKey(key)) {
-				DailyCart.put(key.toString(), ShoppingCart.get(key));
-			} else{
-				DailyCart.put(key.toString(), DailyCart.get(key) + ShoppingCart.get(key));
+		
+		if(!ShoppingCart.isEmpty()) {
+			Print();
+			for (Object key : ShoppingCart.keySet()) {
+				if (!DailyCart.containsKey(key)) {
+					DailyCart.put(key.toString(), ShoppingCart.get(key));
+				} else{
+					DailyCart.put(key.toString(), DailyCart.get(key) + ShoppingCart.get(key));
+				}
 			}
-		}
-		DailyCartValue += ShoppingCartValue;
-		ShoppingCart.clear();
-		ModelTotal.clear();
-		ShoppingCartValue = 0.0f;
+			DailyCartValue += ShoppingCartValue;
+			ShoppingCart.clear();
+			ModelTotal.clear();
+			ShoppingCartValue = 0.0f;
 
-		UpdateCartVisual();
-		try {
-			FileWriter fw = new FileWriter("Resources/DailyDB.txt");
-			PrintWriter pw = new PrintWriter(fw);
-			pw.println(DailyCartValue.toString());
-			for (Object key : DailyCart.keySet()) {
-				pw.println(key.toString() + "/" + DailyCart.get(key).toString());
+			UpdateCartVisual();
+			try {
+				FileWriter fw = new FileWriter("Resources/DailyDB.txt");
+				PrintWriter pw = new PrintWriter(fw);
+				pw.println(DailyCartValue.toString());
+				for (Object key : DailyCart.keySet()) {
+					pw.println(key.toString() + "/" + DailyCart.get(key).toString());
+				}
+				fw.close();
+				pw.close();
+				System.out.println("Works");
+			} catch (IOException e) {
+				System.out.println(e);
 			}
-			fw.close();
-			pw.close();
-			System.out.println("Works");
-		} catch (IOException e) {
-			System.out.println(e);
 		}
+		
+		
 	}
 
 	private void EndOfDay() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd");
+		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
 		Date date = new Date();
 		try {
 			Files.move(Paths.get("Resources", "DailyDB.txt"),
@@ -1233,6 +1276,7 @@ public class MainWindow extends JFrame implements EventListener {
 		System.exit(0);
 	}
 
+	
 	private void UpdateCartVisual() {
 		try {
 			ModelTotal.clear();
@@ -1244,4 +1288,26 @@ public class MainWindow extends JFrame implements EventListener {
 		TotalList.setModel(ModelTotal);
 		labelPrice.setText("Pre\u00E7o: " + ShoppingCartValue.toString() + euro);
 	}
+	
+	private void Print(){
+		JTextArea toPrint = new JTextArea();
+		toPrint.setLineWrap(true);
+		toPrint.append("--Coro do Mosteiro de Grijó--");
+		toPrint.append("\n");
+		for (Object key: ShoppingCart.keySet()) {
+			toPrint.append("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+		}
+		toPrint.append("\n\nTotal: " + ShoppingCartValue.toString() + euro);
+		toPrint.append("\n\n---Obrigado pela Visita---");
+		
+		
+		try {
+			//MAYBE USE ONE LINE OF TEXT AS ONE PAGE , USE FONT HEIGHT TO DETERMINE THAT
+			toPrint.print(null, null, false, printer, null, rootPaneCheckingEnabled);
+		} catch (PrinterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
