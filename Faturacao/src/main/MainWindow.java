@@ -681,7 +681,7 @@ public class MainWindow extends JFrame implements EventListener {
 				if (x == 0) {
 					DailyCartValue = Float.parseFloat(lines.get(0));
 				} else {
-					line = lines.get(x).split("/");
+					line = lines.get(x).split("//");
 					DailyCart.put(line[0], Integer.parseInt(line[1]));
 				}
 			}
@@ -695,8 +695,8 @@ public class MainWindow extends JFrame implements EventListener {
 			List<String> lines = Files.readAllLines(path);
 
 			for (int x = 0; x < lines.size(); x++) {
-				if (!lines.get(x).equals("NULL")) {
-					line = lines.get(x).split("/");
+				line = lines.get(x).split("//");
+				if (!line[1].equals("NULL")) {
 					NameList.put(line[0], line[1]);
 					PriceList.put(line[0], Float.parseFloat(line[2]));
 					NamePriceList.put(line[1], Float.parseFloat(line[2]));
@@ -1178,10 +1178,14 @@ public class MainWindow extends JFrame implements EventListener {
 		PrintService[] printers = PrinterJob.lookupPrintServices();
         for (int x = 0; x < printers.length; x++) {
         	System.out.println(printers[x]);
-            if (printers[x].getName().toLowerCase().indexOf("Two Pilots Demo Printer".toLowerCase()) >= 0) {
-            	System.out.println("Good");
-                printer = printers[x];
-            }
+            try {
+				if (printers[x].getName().toLowerCase().indexOf(Files.readAllLines(Paths.get("Resources", "Printer.txt")).get(0).toLowerCase()) >= 0) {
+					System.out.println("Good");
+				    printer = printers[x];
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
         }
 	}
 	
@@ -1245,6 +1249,7 @@ public class MainWindow extends JFrame implements EventListener {
 				}
 			}
 			DailyCartValue += ShoppingCartValue;
+			DailyCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
 			ShoppingCart.clear();
 			ModelTotal.clear();
 			ShoppingCartValue = 0.0f;
@@ -1255,7 +1260,7 @@ public class MainWindow extends JFrame implements EventListener {
 				PrintWriter pw = new PrintWriter(fw);
 				pw.println(DailyCartValue.toString());
 				for (Object key : DailyCart.keySet()) {
-					pw.println(key.toString() + "/" + DailyCart.get(key).toString());
+					pw.println(key.toString() + "//" + DailyCart.get(key).toString());
 				}
 				fw.close();
 				pw.close();
@@ -1269,12 +1274,7 @@ public class MainWindow extends JFrame implements EventListener {
 	}
 	
 	private void SaveBill() {
-		try {
-			System.out.println("Saving Bill");
-			
-			FileWriter fw = new FileWriter("Resources/LastBill.txt");
-			PrintWriter pw = new PrintWriter(fw);
-			
+		try {			
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			Date date = new Date();
 			
@@ -1289,8 +1289,7 @@ public class MainWindow extends JFrame implements EventListener {
 			toSave.add("\n\n---Obrigado pela Visita---");
 			toSave.add("\n\n" + dateFormat.format(date));
 			
-			Files.write(Paths.get("Resources", "LastBill.txt"), toSave);
-			
+			Files.write(Paths.get("Resources", "LastBill.txt"), toSave);	
 			
 		} catch (IOException e) {
 			e.printStackTrace();

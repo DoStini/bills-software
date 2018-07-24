@@ -1,5 +1,0 @@
-btnBar/Cafe/3.5
-btnBar_0/Bebida/1.0
-btnBar_1/Sumo/2.0
-btnBar_2/NEKA UGLY/0.1
-btnBar_3/Minecrefte/20.0
