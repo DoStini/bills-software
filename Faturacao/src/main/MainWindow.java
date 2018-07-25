@@ -1100,8 +1100,8 @@ public class MainWindow extends JFrame implements EventListener {
 						.addContainerGap()));
 		gl_TotalPanel.setVerticalGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_TotalPanel.createSequentialGroup().addGap(7)
-						.addComponent(TotalBtn, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE).addGap(18)
-						.addComponent(BackScrollPanel, GroupLayout.DEFAULT_SIZE, (int)Math.round(0.94*ScreenHeight), Short.MAX_VALUE)
+						.addComponent(TotalBtn, (int)Math.round(0.1*ScreenHeight), (int)Math.round(0.1*ScreenHeight), Short.MAX_VALUE).addGap(18)
+						.addComponent(BackScrollPanel, GroupLayout.DEFAULT_SIZE, (int)Math.round(0.7*ScreenHeight), Short.MAX_VALUE)
 						.addContainerGap()));
 
 		JScrollPane TotalScroll = new JScrollPane();
@@ -1132,7 +1132,7 @@ public class MainWindow extends JFrame implements EventListener {
 							.addGap(18)
 							.addComponent(btnEndDay, 10, (int)Math.round(0.08*ScreenWidth), Short.MAX_VALUE)
 							.addGap(5))
-						.addComponent(TotalScroll, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+						.addComponent(TotalScroll, Alignment.TRAILING, (int)Math.round(0.2*ScreenWidth), (int)Math.round(0.2*ScreenWidth), Short.MAX_VALUE)
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
 							.addComponent(labelPrice, 10, (int)Math.round(0.2*ScreenWidth), Short.MAX_VALUE)
 							.addContainerGap())
@@ -1152,11 +1152,11 @@ public class MainWindow extends JFrame implements EventListener {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(labelPrice, GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(TotalScroll, GroupLayout.PREFERRED_SIZE, 812, GroupLayout.PREFERRED_SIZE)
+					.addComponent(TotalScroll, (int)Math.round(0.75*ScreenHeight), (int)Math.round(0.75*ScreenHeight), GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnOpenDaily, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-						.addComponent(btnEndDay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(btnEndDay, 10, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 
