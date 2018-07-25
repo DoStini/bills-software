@@ -144,7 +144,7 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton btnBar_15;
 	public JButton btnBar_16;
 	public JButton btnBar_17;
-	public JButton btnManual;
+	public JButton btnBar_18;
 
 	public JPanel SnackPanel;
 	public JButton btnSnack;
@@ -166,7 +166,7 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton btnSnack_15;
 	public JButton btnSnack_16;
 	public JButton btnSnack_17;
-	public JButton btnSnack_18;
+
 	public JPanel KitchenPanel;
 
 	public JButton btnKitchen;
@@ -196,6 +196,7 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton TotalBtn;
 	public JButton btnCleanCart;
 	public JButton btnLastBill;
+	public JButton btnManual;
 	
 	public String path;
 
@@ -293,6 +294,7 @@ public class MainWindow extends JFrame implements EventListener {
 
 		btnManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Debug 1");
 				String price = JOptionPane.showInputDialog(contentPanel, "Preco:", "Manual");
 				try {
 					AddToCartManual("Manual", Float.parseFloat(price));
@@ -398,7 +400,11 @@ public class MainWindow extends JFrame implements EventListener {
 				AddToCart(NameList.get("btnBar_17"), PriceList.get("btnBar_17"));
 			}
 		});
-
+		btnBar_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AddToCart(NameList.get("btnBar_18"), PriceList.get("btnBar_18"));
+			}
+		});
 		
 		btnSnack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -495,7 +501,7 @@ public class MainWindow extends JFrame implements EventListener {
 				AddToCart(NameList.get("btnSnack_17"), PriceList.get("btnSnack_17"));
 			}
 		});
-		btnSnack_18.addActionListener(new ActionListener() {
+		btnManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddToCart(NameList.get("btnSnack_18"), PriceList.get("btnSnack_18"));
 			}
@@ -627,7 +633,8 @@ public class MainWindow extends JFrame implements EventListener {
 		Buttons.put("btnBar_15", btnBar_15);
 		Buttons.put("btnBar_16", btnBar_16);
 		Buttons.put("btnBar_17", btnBar_17);
-
+		Buttons.put("btnBar_18", btnBar_18);
+		
 		Buttons.put("btnSnack", btnSnack);
 		Buttons.put("btnSnack_0", btnSnack_0);
 		Buttons.put("btnSnack_1", btnSnack_1);
@@ -647,7 +654,6 @@ public class MainWindow extends JFrame implements EventListener {
 		Buttons.put("btnSnack_15", btnSnack_15);
 		Buttons.put("btnSnack_16", btnSnack_16);
 		Buttons.put("btnSnack_17", btnSnack_17);
-		Buttons.put("btnSnack_18", btnSnack_18);
 
 		Buttons.put("btnKitchen", btnKitchen);
 		Buttons.put("btnKitchen_0", btnKitchen_0);
@@ -696,6 +702,7 @@ public class MainWindow extends JFrame implements EventListener {
 
 			for (int x = 0; x < lines.size(); x++) {
 				line = lines.get(x).split("//");
+				System.out.println(line[0] + line[1] + line[2]);
 				if (!line[1].equals("NULL")) {
 					NameList.put(line[0], line[1]);
 					PriceList.put(line[0], Float.parseFloat(line[2]));
@@ -856,10 +863,11 @@ public class MainWindow extends JFrame implements EventListener {
 		btnBar_17.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		BarPanel.add(btnBar_17);
 
-		btnManual = new JButton("Manual");
+		btnBar_18 = new JButton("");
+		btnBar_18.setEnabled(false);
 
-		btnManual.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnManual);
+		btnBar_18.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		BarPanel.add(btnBar_18);
 
 		SnackPanel = new JPanel();
 		tabbedPanel.addTab("Snack", null, SnackPanel, null);
@@ -960,10 +968,9 @@ public class MainWindow extends JFrame implements EventListener {
 		btnSnack_17.setEnabled(false);
 		SnackPanel.add(btnSnack_17);
 
-		btnSnack_18 = new JButton("");
-		btnSnack_18.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSnack_18.setEnabled(false);
-		SnackPanel.add(btnSnack_18);
+		btnManual = new JButton("Manual");
+		btnManual.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		SnackPanel.add(btnManual);
 
 		KitchenPanel = new JPanel();
 		tabbedPanel.addTab("Cozinha", null, KitchenPanel, null);
@@ -1168,7 +1175,7 @@ public class MainWindow extends JFrame implements EventListener {
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { contentPanel, MainPanel, tabbedPanel,
 				BarPanel, btnBar, btnBar_0, btnBar_1, btnBar_2, btnBar_3, btnBar_4, btnBar_5, btnBar_6, btnBar_7,
 				btnBar_8, btnBar_9, btnBar_10, btnBar_11, btnBar_12, btnBar_13, btnBar_14, btnBar_15, btnBar_16,
-				btnBar_17, btnManual, TotalPanel, BackScrollPanel, TotalScroll, TotalList, TotalBtn }));
+				btnBar_17, btnBar_18, TotalPanel, BackScrollPanel, TotalScroll, TotalList, TotalBtn }));
 
 	}
 	
