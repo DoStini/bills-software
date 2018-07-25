@@ -74,6 +74,8 @@ import java.awt.Toolkit;
 import java.awt.ScrollPane;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -103,7 +105,9 @@ import javax.print.attribute.PrintRequestAttributeSet;
 
 
 public class MainWindow extends JFrame implements EventListener {
-
+	
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	
 	// Name->Quantity
 	public Map<String, Integer> ShoppingCart = new HashMap<String, Integer>();
 	public Map<String, Integer> DailyCart = new HashMap<String, Integer>();
@@ -144,7 +148,7 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton btnBar_15;
 	public JButton btnBar_16;
 	public JButton btnBar_17;
-	public JButton btnManual;
+	public JButton btnBar_18;
 
 	public JPanel SnackPanel;
 	public JButton btnSnack;
@@ -166,7 +170,7 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton btnSnack_15;
 	public JButton btnSnack_16;
 	public JButton btnSnack_17;
-	public JButton btnSnack_18;
+	public JButton btnManual;
 	public JPanel KitchenPanel;
 
 	public JButton btnKitchen;
@@ -217,10 +221,10 @@ public class MainWindow extends JFrame implements EventListener {
 			public void run() {
 				try {
 					MainWindow frame = new MainWindow();
-					frame.setUndecorated(true);
+					//frame.setUndecorated(true);
 					//frame.setAlwaysOnTop(true);
 					frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-					frame.setResizable(false);
+					frame.setResizable(true);
 					frame.setVisible(true);
 
 				} catch (Exception e) {
@@ -231,6 +235,7 @@ public class MainWindow extends JFrame implements EventListener {
 	}
 
 	public MainWindow() throws IOException {
+		JOptionPane.showMessageDialog(contentPanel, (int)screenSize.getWidth() + "X" + (int)screenSize.getHeight());
 		priceFormat = new DecimalFormat("#.#");
 		initComponents();
 		LoadDatabase();
@@ -398,7 +403,12 @@ public class MainWindow extends JFrame implements EventListener {
 				AddToCart(NameList.get("btnBar_17"), PriceList.get("btnBar_17"));
 			}
 		});
-
+		
+		btnBar_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar_18"), PriceList.get("btnBar_18"));
+			}
+		});
 		
 		btnSnack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -493,11 +503,6 @@ public class MainWindow extends JFrame implements EventListener {
 		btnSnack_17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddToCart(NameList.get("btnSnack_17"), PriceList.get("btnSnack_17"));
-			}
-		});
-		btnSnack_18.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AddToCart(NameList.get("btnSnack_18"), PriceList.get("btnSnack_18"));
 			}
 		});
 		
@@ -627,6 +632,7 @@ public class MainWindow extends JFrame implements EventListener {
 		Buttons.put("btnBar_15", btnBar_15);
 		Buttons.put("btnBar_16", btnBar_16);
 		Buttons.put("btnBar_17", btnBar_17);
+		Buttons.put("btnBar_18", btnBar_18);
 
 		Buttons.put("btnSnack", btnSnack);
 		Buttons.put("btnSnack_0", btnSnack_0);
@@ -647,7 +653,6 @@ public class MainWindow extends JFrame implements EventListener {
 		Buttons.put("btnSnack_15", btnSnack_15);
 		Buttons.put("btnSnack_16", btnSnack_16);
 		Buttons.put("btnSnack_17", btnSnack_17);
-		Buttons.put("btnSnack_18", btnSnack_18);
 
 		Buttons.put("btnKitchen", btnKitchen);
 		Buttons.put("btnKitchen_0", btnKitchen_0);
@@ -714,16 +719,18 @@ public class MainWindow extends JFrame implements EventListener {
 	}
 
 	private void initComponents() {
-
+		double ScreenHeight = screenSize.getHeight();
+		double ScreenWidth = screenSize.getWidth();
+		
+		
 		setFont(new Font("Source Code Pro Black", Font.PLAIN, 15));
 		setTitle("Fatura\u00E7\u00E3o");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1920, 1080);
+		setBounds(100, 100, screenSize.width, screenSize.height);
 		contentPanel = new JPanel();
 		contentPanel.setBackground(Color.LIGHT_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPanel);
-
 		JPanel MainPanel = new JPanel();
 		MainPanel.setBorder(new LineBorder(new Color(192, 192, 192), 10, true));
 		MainPanel.setBackground(Color.DARK_GRAY);
@@ -732,18 +739,24 @@ public class MainWindow extends JFrame implements EventListener {
 		TotalPanel.setBorder(new LineBorder(Color.LIGHT_GRAY, 10, true));
 		TotalPanel.setBackground(Color.DARK_GRAY);
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
-		gl_contentPanel.setHorizontalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPanel.createSequentialGroup().addContainerGap()
-						.addComponent(MainPanel, GroupLayout.DEFAULT_SIZE, 1504, Short.MAX_VALUE).addGap(18)
-						.addComponent(TotalPanel, GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)));
-		gl_contentPanel.setVerticalGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPanel.createSequentialGroup().addGap(11)
-						.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(TotalPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1009,
-										Short.MAX_VALUE)
-								.addComponent(MainPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap()));
+		gl_contentPanel.setHorizontalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(MainPanel, 20, (int)Math.round(0.7*ScreenWidth), Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(TotalPanel, 20, (int)Math.round(0.3*ScreenWidth), Short.MAX_VALUE))
+		);
+		gl_contentPanel.setVerticalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGap(11)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(MainPanel, 100, (int)Math.round(0.94*ScreenHeight), Short.MAX_VALUE)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addComponent(TotalPanel, 100, (int)Math.round(0.94*ScreenHeight), Short.MAX_VALUE)
+							.addContainerGap())))
+		);
 
 		JTabbedPane tabbedPanel = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPanel.setBackground(Color.LIGHT_GRAY);
@@ -856,10 +869,11 @@ public class MainWindow extends JFrame implements EventListener {
 		btnBar_17.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		BarPanel.add(btnBar_17);
 
-		btnManual = new JButton("Manual");
+		btnBar_18 = new JButton("");
+		btnBar_18.setEnabled(false);
 
-		btnManual.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnManual);
+		btnBar_18.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		BarPanel.add(btnBar_18);
 
 		SnackPanel = new JPanel();
 		tabbedPanel.addTab("Snack", null, SnackPanel, null);
@@ -960,10 +974,9 @@ public class MainWindow extends JFrame implements EventListener {
 		btnSnack_17.setEnabled(false);
 		SnackPanel.add(btnSnack_17);
 
-		btnSnack_18 = new JButton("");
-		btnSnack_18.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSnack_18.setEnabled(false);
-		SnackPanel.add(btnSnack_18);
+		btnManual = new JButton("Manual");
+		btnManual.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		SnackPanel.add(btnManual);
 
 		KitchenPanel = new JPanel();
 		tabbedPanel.addTab("Cozinha", null, KitchenPanel, null);
@@ -1080,9 +1093,9 @@ public class MainWindow extends JFrame implements EventListener {
 		gl_TotalPanel.setHorizontalGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_TotalPanel.createSequentialGroup().addGap(7)
 						.addGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(BackScrollPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325,
+								.addComponent(BackScrollPanel, Alignment.TRAILING, 20, (int)Math.round(0.25*ScreenWidth),
 										Short.MAX_VALUE)
-								.addComponent(TotalBtn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 328,
+								.addComponent(TotalBtn, Alignment.TRAILING, 20, (int)Math.round(0.25*ScreenWidth),
 										Short.MAX_VALUE))
 						.addContainerGap()));
 		gl_TotalPanel.setVerticalGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
@@ -1115,16 +1128,16 @@ public class MainWindow extends JFrame implements EventListener {
 					.addContainerGap()
 					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
-							.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
+							.addComponent(btnOpenDaily, 10, (int)Math.round(0.1*ScreenWidth), Short.MAX_VALUE)
 							.addGap(18)
-							.addComponent(btnEndDay, GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
+							.addComponent(btnEndDay, 10, (int)Math.round(0.1*ScreenWidth), Short.MAX_VALUE)
 							.addGap(5))
 						.addComponent(TotalScroll, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
-							.addComponent(labelPrice, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+							.addComponent(labelPrice, 10, (int)Math.round(0.25*ScreenWidth), Short.MAX_VALUE)
 							.addContainerGap())
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
-							.addComponent(btnCleanCart, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnCleanCart, 10, (int)Math.round(0.1*ScreenWidth), GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnLastBill, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())))
@@ -1168,7 +1181,8 @@ public class MainWindow extends JFrame implements EventListener {
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { contentPanel, MainPanel, tabbedPanel,
 				BarPanel, btnBar, btnBar_0, btnBar_1, btnBar_2, btnBar_3, btnBar_4, btnBar_5, btnBar_6, btnBar_7,
 				btnBar_8, btnBar_9, btnBar_10, btnBar_11, btnBar_12, btnBar_13, btnBar_14, btnBar_15, btnBar_16,
-				btnBar_17, btnManual, TotalPanel, BackScrollPanel, TotalScroll, TotalList, TotalBtn }));
+				btnBar_17, btnBar_18, TotalPanel, BackScrollPanel, TotalScroll, TotalList, TotalBtn }));
+		
 
 	}
 	
