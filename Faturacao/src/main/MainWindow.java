@@ -743,9 +743,9 @@ public class MainWindow extends JFrame implements EventListener {
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(MainPanel, 20, (int)Math.round(0.7*ScreenWidth), Short.MAX_VALUE)
+					.addComponent(MainPanel, 20, (int)Math.round(0.75*ScreenWidth), Short.MAX_VALUE)
 					.addGap(18)
-					.addComponent(TotalPanel, 20, (int)Math.round(0.3*ScreenWidth), Short.MAX_VALUE))
+					.addComponent(TotalPanel, 20, (int)Math.round(0.25*ScreenWidth), Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -1093,15 +1093,15 @@ public class MainWindow extends JFrame implements EventListener {
 		gl_TotalPanel.setHorizontalGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_TotalPanel.createSequentialGroup().addGap(7)
 						.addGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(BackScrollPanel, Alignment.TRAILING, 20, (int)Math.round(0.25*ScreenWidth),
+								.addComponent(BackScrollPanel, Alignment.TRAILING, 20, (int)Math.round(0.2*ScreenWidth),
 										Short.MAX_VALUE)
-								.addComponent(TotalBtn, Alignment.TRAILING, 20, (int)Math.round(0.25*ScreenWidth),
+								.addComponent(TotalBtn, Alignment.TRAILING, 20, (int)Math.round(0.2*ScreenWidth),
 										Short.MAX_VALUE))
 						.addContainerGap()));
 		gl_TotalPanel.setVerticalGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_TotalPanel.createSequentialGroup().addGap(7)
 						.addComponent(TotalBtn, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE).addGap(18)
-						.addComponent(BackScrollPanel, GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
+						.addComponent(BackScrollPanel, GroupLayout.DEFAULT_SIZE, (int)Math.round(0.94*ScreenHeight), Short.MAX_VALUE)
 						.addContainerGap()));
 
 		JScrollPane TotalScroll = new JScrollPane();
@@ -1128,16 +1128,16 @@ public class MainWindow extends JFrame implements EventListener {
 					.addContainerGap()
 					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
-							.addComponent(btnOpenDaily, 10, (int)Math.round(0.1*ScreenWidth), Short.MAX_VALUE)
+							.addComponent(btnOpenDaily, 10, (int)Math.round(0.08*ScreenWidth), Short.MAX_VALUE)
 							.addGap(18)
-							.addComponent(btnEndDay, 10, (int)Math.round(0.1*ScreenWidth), Short.MAX_VALUE)
+							.addComponent(btnEndDay, 10, (int)Math.round(0.08*ScreenWidth), Short.MAX_VALUE)
 							.addGap(5))
 						.addComponent(TotalScroll, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
-							.addComponent(labelPrice, 10, (int)Math.round(0.25*ScreenWidth), Short.MAX_VALUE)
+							.addComponent(labelPrice, 10, (int)Math.round(0.2*ScreenWidth), Short.MAX_VALUE)
 							.addContainerGap())
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
-							.addComponent(btnCleanCart, 10, (int)Math.round(0.1*ScreenWidth), GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnCleanCart, 10, (int)Math.round(0.08*ScreenWidth), GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnLastBill, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())))
