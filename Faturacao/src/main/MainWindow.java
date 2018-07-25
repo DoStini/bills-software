@@ -166,7 +166,7 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton btnSnack_15;
 	public JButton btnSnack_16;
 	public JButton btnSnack_17;
-
+	public JButton btnManual;
 	public JPanel KitchenPanel;
 
 	public JButton btnKitchen;
@@ -196,7 +196,6 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton TotalBtn;
 	public JButton btnCleanCart;
 	public JButton btnLastBill;
-	public JButton btnManual;
 	
 	public String path;
 
@@ -273,7 +272,7 @@ public class MainWindow extends JFrame implements EventListener {
 		btnEndDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (JOptionPane.showConfirmDialog(contentPanel,
-						"Tem a certeza que pretende fechar sessão? Não feche antes das 00:00H", "",
+						"Tem a certeza que pretende fechar sessï¿½o? Nï¿½o feche antes das 00:00H", "",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					EndOfDay();
 				}
@@ -294,12 +293,11 @@ public class MainWindow extends JFrame implements EventListener {
 
 		btnManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Debug 1");
 				String price = JOptionPane.showInputDialog(contentPanel, "Preco:", "Manual");
 				try {
 					AddToCartManual("Manual", Float.parseFloat(price));
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(contentPanel, "O valor que introduziu não é válido: \n	-Certifique-se que usa apenas números\n	-Certifique-se que usa '.' e não ','", "Erro", JOptionPane.OK_OPTION); 
+					JOptionPane.showMessageDialog(contentPanel, "O valor que introduziu nï¿½o ï¿½ vï¿½lido: \n	-Certifique-se que usa apenas nï¿½meros\n	-Certifique-se que usa '.' e nï¿½o ','", "Erro", JOptionPane.OK_OPTION); 
 			    }  
 				
 			}
@@ -401,7 +399,7 @@ public class MainWindow extends JFrame implements EventListener {
 			}
 		});
 		btnBar_18.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				AddToCart(NameList.get("btnBar_18"), PriceList.get("btnBar_18"));
 			}
 		});
@@ -501,11 +499,7 @@ public class MainWindow extends JFrame implements EventListener {
 				AddToCart(NameList.get("btnSnack_17"), PriceList.get("btnSnack_17"));
 			}
 		});
-		btnManual.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AddToCart(NameList.get("btnSnack_18"), PriceList.get("btnSnack_18"));
-			}
-		});
+
 		
 		btnKitchen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -634,7 +628,7 @@ public class MainWindow extends JFrame implements EventListener {
 		Buttons.put("btnBar_16", btnBar_16);
 		Buttons.put("btnBar_17", btnBar_17);
 		Buttons.put("btnBar_18", btnBar_18);
-		
+
 		Buttons.put("btnSnack", btnSnack);
 		Buttons.put("btnSnack_0", btnSnack_0);
 		Buttons.put("btnSnack_1", btnSnack_1);
@@ -702,7 +696,6 @@ public class MainWindow extends JFrame implements EventListener {
 
 			for (int x = 0; x < lines.size(); x++) {
 				line = lines.get(x).split("//");
-				System.out.println(line[0] + line[1] + line[2]);
 				if (!line[1].equals("NULL")) {
 					NameList.put(line[0], line[1]);
 					PriceList.put(line[0], Float.parseFloat(line[2]));
@@ -1379,7 +1372,7 @@ public class MainWindow extends JFrame implements EventListener {
 		
 		JTextArea toPrint = new JTextArea();
 		toPrint.setLineWrap(true);
-		toPrint.append("--Coro do Mosteiro de Grijó--");
+		toPrint.append("--Coro do Mosteiro de Grijï¿½--");
 		toPrint.append("\n");
 		for (Object key: ShoppingCart.keySet()) {
 			toPrint.append("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
@@ -1405,7 +1398,7 @@ public class MainWindow extends JFrame implements EventListener {
 		
 		JTextArea toPrint = new JTextArea();
 		toPrint.setLineWrap(true);
-		toPrint.append("--Coro do Mosteiro de Grijó--");
+		toPrint.append("--Coro do Mosteiro de Grijï¿½--");
 		toPrint.append("\n");
 		for (Object key: DailyCart.keySet()) {
 			float total = NamePriceList.get(key) * ShoppingCart.get(key);
