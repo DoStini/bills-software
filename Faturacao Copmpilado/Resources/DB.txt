@@ -1,0 +1,59 @@
+btnBar//Cerveja//1.0
+btnBar_0//Copo Vinho//1.0
+btnBar_1//Jarro 0.5L Vinho//2.0
+btnBar_2//Jarra 1L Vinho//3.0
+btnBar_3//Garrafa Vinho Verde//4.5
+btnBar_4//Sumo Copo//1.0
+btnBar_5//Agua s/ gas 1.5L//1.5
+btnBar_6//Agua s/ gas 0.33L//0.5
+btnBar_7//Agua c/ gas//1.0
+btnBar_8//Sangria Copo//2.0
+btnBar_9//Sangria 0.5L//3.0
+btnBar_10//Sangria 1L//5.0
+btnBar_11//Receita 0.5L//2.5
+btnBar_12//Receita 1L//4.0
+btnBar_13//Caipirinha//2.5
+btnBar_14//Mojito//3.0
+btnBar_15//Gin Bombay//4.0
+btnBar_16//Gin Tanqueray//5.0
+btnBar_17//Moscatel Tonico//3.0
+btnBar_18//Cafe//0.6
+btnSnack//Francesinha//6.5
+btnSnack_0//Francesinha Extra//7.0
+btnSnack_1//Francesinha Completa//7.5
+btnSnack_2//Cachorro//2.5
+btnSnack_3//Cachorro Espcial//4.5
+btnSnack_4//Cachorro Especial Extra//5.0
+btnSnack_5//Hamburguer//2.5
+btnSnack_6//Hamburguer c/ Ovo//3.0
+btnSnack_7//Hamburguer Prato//5.0
+btnSnack_8//1/2 Pica Pau//5.0
+btnSnack_9//Pica Pau//8.0
+btnSnack_10//Tosta Mista//1.5
+btnSnack_11//Tosta Mista Especial//2.5
+btnSnack_12//Prego Pao//3.0
+btnSnack_13//NULL//0.1
+btnSnack_14//NULL//20.0
+btnSnack_15//NULL//3.5
+btnSnack_16//NULL//1.0
+btnSnack_17//NULL//2.0
+btnKitchen//Prego Prato//6.5
+btnKitchen_0//Bifanas//2.5
+btnKitchen_1//Sandes Pernil//2.5
+btnKitchen_2//Sandes Pernil Especial//3.5
+btnKitchen_3//Ovos Rotos//3.5
+btnKitchen_4//Rojoes em prato//5.0
+btnKitchen_5//Moelas em Prato//4.5
+btnKitchen_6//Menu Crianca 1//2.0
+btnKitchen_7//Menu Crianca 2//3.0
+btnKitchen_8//NULL//0.1
+btnKitchen_9//Pires Rojoes//2.0
+btnKitchen_10//Pires Moelas//1.5
+btnKitchen_11//NULL//1.0
+btnKitchen_12//NULL//2.0
+btnKitchen_13//NULL//0.1
+btnKitchen_14//Papas//1.5
+btnKitchen_15//Dose Batata//1.0
+btnKitchen_16//Chourico Assado//2.5
+btnKitchen_17//Tremocos/Azeitonas//0.5
+btnKitchen_18//Cesta Pao//0.5

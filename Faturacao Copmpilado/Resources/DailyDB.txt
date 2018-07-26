@@ -1,0 +1,13 @@
+2.0
+Jarra 1L Vinho//15
+Receita 0.5L//5
+Receita 1L//3
+Garrafa Vinho Verde//4
+Sangria 1L//2
+Jarro 0.5L Vinho//18
+Agua c/ gas//12
+Copo Vinho//13
+Agua s/ gas 0.33L//16
+Agua s/ gas 1.5L//7
+Sangria Copo//4
+Cerveja//3
