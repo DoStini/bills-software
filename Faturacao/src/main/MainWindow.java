@@ -74,6 +74,8 @@ import java.awt.Toolkit;
 import java.awt.ScrollPane;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -1312,16 +1314,12 @@ public class MainWindow extends JFrame implements EventListener {
 			
 			if(text != "") {
 				if (JOptionPane.showConfirmDialog(contentPanel, text, "Imprimir Ultima Conta?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					try {
-						JTextArea toPrint = new JTextArea();
-						toPrint.setLineWrap(true);
-						
-						toPrint.append(text);
-						toPrint.print(null, null, false, printer, null, rootPaneCheckingEnabled);
-						
-					} catch (PrinterException e) {
-						e.printStackTrace();
-					}
+					PrinterService ps = new PrinterService();
+					text += "\n \n \n \n \n \n";
+					ps.printString(printer, text);
+					
+					byte[] cutP = new byte[] { 0x1d, 'V', 1 };//CUT THE PAPER PREPARATION
+					ps.printBytes(printer, cutP); //CUT THAT SHIIIIT
 				}
 			}
 			
@@ -1367,55 +1365,50 @@ public class MainWindow extends JFrame implements EventListener {
 	}
 	
 	private void BillPrint(){
+		PrinterService ps = new PrinterService();
 		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
 		Date date = new Date();
 		
-		JTextArea toPrint = new JTextArea();
-		toPrint.setLineWrap(true);
-		toPrint.append("--Coro do Mosteiro de Grij�--");
-		toPrint.append("\n");
+		String toPrint = new String();
+		toPrint +=("--Coro do Mosteiro de Grijo--");
 		for (Object key: ShoppingCart.keySet()) {
-			toPrint.append("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+			toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
 		}
-		toPrint.append("\n\nTotal: " + ShoppingCartValue.toString() + euro);
-		toPrint.append("\n\n---Obrigado pela Visita---");
-		toPrint.append("\n\n" + dateFormat.format(date));
+		toPrint+=("\n \nTotal: " + ShoppingCartValue.toString() + euro);
+		toPrint+=("\n \n---Obrigado pela Visita---");
+		toPrint+=("\n\n***Nao serve como Fatura!***");
+		toPrint+=("\n \n" + dateFormat.format(date) + "\n \n \n \n \n \n");
 		
+		ps.printString(printer, toPrint);
 		
-		try {
-			//MAYBE USE ONE LINE OF TEXT AS ONE PAGE , USE FONT HEIGHT TO DETERMINE THAT
-			toPrint.print(null, null, false, printer, null, rootPaneCheckingEnabled);
-		} catch (PrinterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		byte[] cutP = new byte[] { 0x1d, 'V', 1 };//CUT THE PAPER PREPARATION
+		ps.printBytes(printer, cutP); //CUT THAT SHIIIIT
+		
 	}
 	
 	private void DailyPrint(){
+		PrinterService ps = new PrinterService();
+		
 		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
 		DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
 		Date date = new Date();
 		
-		JTextArea toPrint = new JTextArea();
-		toPrint.setLineWrap(true);
-		toPrint.append("--Coro do Mosteiro de Grij�--");
-		toPrint.append("\n");
+		String toPrint = new String();
+		toPrint+=("--Coro do Mosteiro de Grijo--");
+		toPrint+=("\n");
 		for (Object key: DailyCart.keySet()) {
 			float total = NamePriceList.get(key) * ShoppingCart.get(key);
 			total = 0;
-			toPrint.append("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + total + euro);
+			toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + total + euro);
 		}
-		toPrint.append("\n\nTotal: " + ShoppingCartValue.toString() + euro);
-		toPrint.append("\n\n---Obrigado pela Visita---");
-		toPrint.append("\n\nDia: " + dateFormat.format(date));
-		toPrint.append("\nHora:" + hourFormat.format(date));
+		toPrint+=("\n\nTotal: " + ShoppingCartValue.toString() + euro);
+		toPrint+=("\n\n---Obrigado pela Visita---");
+		toPrint+=("\n\nDia: " + dateFormat.format(date));
+		toPrint+=("\nHora:" + hourFormat.format(date));
 		
-		try {
-			//MAYBE USE ONE LINE OF TEXT AS ONE PAGE , USE FONT HEIGHT TO DETERMINE THAT
-			toPrint.print(null, null, false, printer, null, rootPaneCheckingEnabled);
-		} catch (PrinterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ps.printString(printer, toPrint);
+		
+		byte[] cutP = new byte[] { 0x1d, 'V', 1 };//CUT THE PAPER PREPARATION
+		ps.printBytes(printer, cutP); //CUT THAT SHIIIIT
 	}
 }
