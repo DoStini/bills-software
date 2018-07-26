@@ -720,7 +720,7 @@ public class MainWindow extends JFrame implements EventListener {
 		setFont(new Font("Source Code Pro Black", Font.PLAIN, 15));
 		setTitle("Fatura\u00E7\u00E3o");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1920, 1080);
+		setBounds(100, 100, 1280, 800);
 		contentPanel = new JPanel();
 		contentPanel.setBackground(Color.LIGHT_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -734,18 +734,23 @@ public class MainWindow extends JFrame implements EventListener {
 		TotalPanel.setBorder(new LineBorder(Color.LIGHT_GRAY, 10, true));
 		TotalPanel.setBackground(Color.DARK_GRAY);
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
-		gl_contentPanel.setHorizontalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPanel.createSequentialGroup().addContainerGap()
-						.addComponent(MainPanel, GroupLayout.DEFAULT_SIZE, 1504, Short.MAX_VALUE).addGap(18)
-						.addComponent(TotalPanel, GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)));
-		gl_contentPanel.setVerticalGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPanel.createSequentialGroup().addGap(11)
-						.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(TotalPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1009,
-										Short.MAX_VALUE)
-								.addComponent(MainPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap()));
+		gl_contentPanel.setHorizontalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(MainPanel, GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(TotalPanel, GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
+		);
+		gl_contentPanel.setVerticalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_contentPanel.createSequentialGroup()
+					.addGap(11)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(TotalPanel, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+						.addComponent(MainPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
+					.addContainerGap(299, Short.MAX_VALUE))
+		);
 
 		JTabbedPane tabbedPanel = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPanel.setBackground(Color.LIGHT_GRAY);
@@ -1078,20 +1083,40 @@ public class MainWindow extends JFrame implements EventListener {
 
 		JPanel BackScrollPanel = new JPanel();
 		BackScrollPanel.setBorder(null);
+		
+				btnEndDay = new JButton("Fechar Sess\u00E3o");
+		
+				btnOpenDaily = new JButton("Di\u00E1rio");
 		GroupLayout gl_TotalPanel = new GroupLayout(TotalPanel);
-		gl_TotalPanel.setHorizontalGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_TotalPanel.createSequentialGroup().addGap(7)
-						.addGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(BackScrollPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325,
-										Short.MAX_VALUE)
-								.addComponent(TotalBtn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 328,
-										Short.MAX_VALUE))
-						.addContainerGap()));
-		gl_TotalPanel.setVerticalGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_TotalPanel.createSequentialGroup().addGap(7)
-						.addComponent(TotalBtn, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE).addGap(18)
-						.addComponent(BackScrollPanel, GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
-						.addContainerGap()));
+		gl_TotalPanel.setHorizontalGroup(
+			gl_TotalPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_TotalPanel.createSequentialGroup()
+					.addGroup(gl_TotalPanel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_TotalPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+							.addComponent(btnEndDay, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_TotalPanel.createSequentialGroup()
+							.addGap(7)
+							.addGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(BackScrollPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+								.addComponent(TotalBtn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))))
+					.addContainerGap())
+		);
+		gl_TotalPanel.setVerticalGroup(
+			gl_TotalPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_TotalPanel.createSequentialGroup()
+					.addGap(7)
+					.addComponent(TotalBtn, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(BackScrollPanel, GroupLayout.PREFERRED_SIZE, 584, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_TotalPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnEndDay, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
 
 		JScrollPane TotalScroll = new JScrollPane();
 		TotalScroll.setViewportBorder(null);
@@ -1100,10 +1125,6 @@ public class MainWindow extends JFrame implements EventListener {
 
 		labelPrice = new JLabel("Pre\u00E7o: ");
 		labelPrice.setFont(new Font("Dialog", Font.BOLD, 25));
-
-		btnOpenDaily = new JButton("Di\u00E1rio");
-
-		btnEndDay = new JButton("Fechar Sess\u00E3o");
 		
 		btnCleanCart = new JButton("Limpar Carrinho");
 		
@@ -1116,11 +1137,6 @@ public class MainWindow extends JFrame implements EventListener {
 				.addGroup(gl_BackScrollPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_BackScrollPanel.createSequentialGroup()
-							.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
-							.addGap(18)
-							.addComponent(btnEndDay, GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
-							.addGap(5))
 						.addComponent(TotalScroll, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
 							.addComponent(labelPrice, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
@@ -1139,14 +1155,10 @@ public class MainWindow extends JFrame implements EventListener {
 						.addComponent(btnCleanCart, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnLastBill, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(labelPrice, GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE)
+					.addComponent(labelPrice, GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(TotalScroll, GroupLayout.PREFERRED_SIZE, 812, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnOpenDaily, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-						.addComponent(btnEndDay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap())
+					.addComponent(TotalScroll, GroupLayout.PREFERRED_SIZE, 522, GroupLayout.PREFERRED_SIZE)
+					.addGap(319))
 		);
 
 		TotalList = new JList();
