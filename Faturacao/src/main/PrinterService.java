@@ -44,7 +44,9 @@ public class PrinterService implements Printable{
 	        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
 	    	
 	        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-
+	        
+	        
+	        
 	        PrintService service = printer;
 
 	        DocPrintJob job = service.createPrintJob();
@@ -58,7 +60,7 @@ public class PrinterService implements Printable{
 
 	            Doc doc = new SimpleDoc(bytes, flavor, null);
 
-
+	            
 	            job.print(doc, null);
 
 	        } catch (Exception e) {
