@@ -723,7 +723,7 @@ public class MainWindow extends JFrame implements EventListener {
 		setFont(new Font("Source Code Pro Black", Font.PLAIN, 15));
 		setTitle("Fatura\u00E7\u00E3o");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1080, 800);
+		setBounds(100, 100, 1280, 800);
 		contentPanel = new JPanel();
 		contentPanel.setBackground(Color.LIGHT_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -741,7 +741,7 @@ public class MainWindow extends JFrame implements EventListener {
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(MainPanel, GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+					.addComponent(MainPanel, GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
 					.addGap(18)
 					.addComponent(TotalPanel, GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
 		);
@@ -749,10 +749,10 @@ public class MainWindow extends JFrame implements EventListener {
 			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(Alignment.LEADING, gl_contentPanel.createSequentialGroup()
 					.addGap(11)
-					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(TotalPanel, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-						.addComponent(MainPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE))
-					.addContainerGap(297, Short.MAX_VALUE))
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(TotalPanel, GroupLayout.PREFERRED_SIZE, 736, GroupLayout.PREFERRED_SIZE)
+						.addComponent(MainPanel, GroupLayout.DEFAULT_SIZE, 1039, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 
 		JTabbedPane tabbedPanel = new JTabbedPane(JTabbedPane.TOP);
@@ -1086,14 +1086,25 @@ public class MainWindow extends JFrame implements EventListener {
 
 		JPanel BackScrollPanel = new JPanel();
 		BackScrollPanel.setBorder(null);
+		
+				btnOpenDaily = new JButton("Di\u00E1rio");
+		
+				btnEndDay = new JButton("Fechar Sess\u00E3o");
 		GroupLayout gl_TotalPanel = new GroupLayout(TotalPanel);
 		gl_TotalPanel.setHorizontalGroup(
 			gl_TotalPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_TotalPanel.createSequentialGroup()
-					.addGap(7)
 					.addGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(BackScrollPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-						.addComponent(TotalBtn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
+						.addGroup(gl_TotalPanel.createSequentialGroup()
+							.addGap(7)
+							.addGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(BackScrollPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+								.addComponent(TotalBtn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)))
+						.addGroup(Alignment.TRAILING, gl_TotalPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnOpenDaily, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnEndDay, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_TotalPanel.setVerticalGroup(
@@ -1102,8 +1113,12 @@ public class MainWindow extends JFrame implements EventListener {
 					.addGap(7)
 					.addComponent(TotalBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGap(18)
-					.addComponent(BackScrollPanel, GroupLayout.PREFERRED_SIZE, 639, GroupLayout.PREFERRED_SIZE)
-					.addGap(291))
+					.addComponent(BackScrollPanel, GroupLayout.PREFERRED_SIZE, 596, GroupLayout.PREFERRED_SIZE)
+					.addGap(8)
+					.addGroup(gl_TotalPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnOpenDaily)
+						.addComponent(btnEndDay))
+					.addContainerGap())
 		);
 
 		JScrollPane TotalScroll = new JScrollPane();
@@ -1113,10 +1128,6 @@ public class MainWindow extends JFrame implements EventListener {
 
 		labelPrice = new JLabel("Pre\u00E7o: ");
 		labelPrice.setFont(new Font("Dialog", Font.BOLD, 25));
-
-		btnOpenDaily = new JButton("Di\u00E1rio");
-
-		btnEndDay = new JButton("Fechar Sess\u00E3o");
 		
 		btnCleanCart = new JButton("Limpar Carrinho");
 		
@@ -1125,15 +1136,10 @@ public class MainWindow extends JFrame implements EventListener {
 
 		GroupLayout gl_BackScrollPanel = new GroupLayout(BackScrollPanel);
 		gl_BackScrollPanel.setHorizontalGroup(
-			gl_BackScrollPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_BackScrollPanel.createSequentialGroup()
+			gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_BackScrollPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_BackScrollPanel.createSequentialGroup()
-							.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnEndDay, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-							.addContainerGap())
 						.addComponent(TotalScroll, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
 							.addComponent(labelPrice, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
@@ -1152,14 +1158,10 @@ public class MainWindow extends JFrame implements EventListener {
 						.addComponent(btnCleanCart, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnLastBill, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(labelPrice, GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE)
+					.addComponent(labelPrice, GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(TotalScroll, GroupLayout.PREFERRED_SIZE, 529, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEndDay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnOpenDaily, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
-					.addGap(283))
+					.addComponent(TotalScroll, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
+					.addGap(29))
 		);
 
 		TotalList = new JList();
@@ -1194,7 +1196,8 @@ public class MainWindow extends JFrame implements EventListener {
         for (int x = 0; x < printers.length; x++) {
         	System.out.println(printers[x]);
             try {
-				if (printers[x].getName().toLowerCase().indexOf(Files.readAllLines(Paths.get("Resources", "Printer.txt")).get(0).toLowerCase()) >= 0) {
+            	String name = Files.readAllLines(Paths.get("Resources", "Printer.txt")).get(0).toLowerCase();
+				if (printers[x].getName().toLowerCase().indexOf(name) >= 0) {
 					System.out.println("Good");
 				    printer = printers[x];
 				}
@@ -1212,7 +1215,16 @@ public class MainWindow extends JFrame implements EventListener {
 			ShoppingCart.put(name, ShoppingCart.get(name) + 1);
 			ShoppingCartValue += price;
 		}
-		ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+		System.out.println(ShoppingCartValue);
+		System.out.println("Formated: " + priceFormat.format(ShoppingCartValue));
+		if(priceFormat.format(ShoppingCartValue).contains(",")) {
+			System.out.println("If");
+			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue).replace(",", "."));
+		} else {
+			System.out.println("Else");
+			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+		}
+		
 		UpdateCartVisual();
 	}
 	
@@ -1225,7 +1237,13 @@ public class MainWindow extends JFrame implements EventListener {
 			ShoppingCart.put(name + " "+ price.toString() + euro, ShoppingCart.get(name + " "+ price.toString() + euro) + 1);
 			ShoppingCartValue += price;
 		}
-		ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+		if(priceFormat.format(ShoppingCartValue).contains(",")) {
+			System.out.println("If");
+			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue).replace(",", "."));
+		} else {
+			System.out.println("Else");
+			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+		}
 		UpdateCartVisual();
 	}
 
@@ -1246,7 +1264,13 @@ public class MainWindow extends JFrame implements EventListener {
 				ShoppingCart.put(item, ShoppingCart.get(item) - 1);
 			}
 
-			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+			if(priceFormat.format(ShoppingCartValue).contains(",")) {
+				System.out.println("If");
+				ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue).replace(",", "."));
+			} else {
+				System.out.println("Else");
+				ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+			}
 			UpdateCartVisual();
 		}
 	}
@@ -1264,7 +1288,14 @@ public class MainWindow extends JFrame implements EventListener {
 				}
 			}
 			DailyCartValue += ShoppingCartValue;
-			DailyCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+			if(priceFormat.format(DailyCartValue).contains(",")) {
+				System.out.println("If");
+				DailyCartValue = Float.parseFloat(priceFormat.format(DailyCartValue).replace(",", "."));
+			} else {
+				System.out.println("Else");
+				DailyCartValue = Float.parseFloat(priceFormat.format(DailyCartValue));
+			}
+
 			ShoppingCart.clear();
 			ModelTotal.clear();
 			ShoppingCartValue = 0.0f;
@@ -1350,7 +1381,7 @@ public class MainWindow extends JFrame implements EventListener {
 	
 	private void EndOfDay() {
 		DailyPrint();
-		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy HH:mm:ss" + ".txt");
+		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
 		Date date = new Date();
 		try {
 			Files.move(Paths.get("Resources", "DailyDB.txt"),
@@ -1360,9 +1391,11 @@ public class MainWindow extends JFrame implements EventListener {
 		}
 
 		try {
-			List<String> toPrint = new ArrayList<>();
-			toPrint.add("0.0");
-			Files.write(Paths.get("Resources", "DailyDB.txt"), toPrint);
+			FileWriter fw = new FileWriter("Resources/DailyDB.txt");
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println("0.0");
+			fw.close();
+			pw.close();
 		} catch (IOException e) {
 			System.out.println(e);
 		}
