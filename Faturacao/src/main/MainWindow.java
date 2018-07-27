@@ -27,6 +27,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -274,7 +275,7 @@ public class MainWindow extends JFrame implements EventListener {
 		btnEndDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (JOptionPane.showConfirmDialog(contentPanel,
-						"Tem a certeza que pretende fechar sess�o? N�o feche antes das 00:00H", "",
+						"Tem a certeza que pretende fechar sessao? Nao feche antes das 00:00H", "",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					EndOfDay();
 				}
@@ -299,7 +300,7 @@ public class MainWindow extends JFrame implements EventListener {
 				try {
 					AddToCartManual("Manual", Float.parseFloat(price));
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(contentPanel, "O valor que introduziu n�o � v�lido: \n	-Certifique-se que usa apenas n�meros\n	-Certifique-se que usa '.' e n�o ','", "Erro", JOptionPane.OK_OPTION); 
+					JOptionPane.showMessageDialog(contentPanel, "O valor que introduziu nao e valido: \n	-Certifique-se que usa apenas numeros\n	-Certifique-se que usa '.' e nao ','", "Erro", JOptionPane.OK_OPTION); 
 			    }  
 				
 			}
@@ -678,15 +679,17 @@ public class MainWindow extends JFrame implements EventListener {
 		line = null;
 		try {
 			List<String> lines = Files.readAllLines(path);
-
-			for (int x = 0; x < lines.size(); x++) {
-				if (x == 0) {
-					DailyCartValue = Float.parseFloat(lines.get(0));
-				} else {
-					line = lines.get(x).split("//");
-					DailyCart.put(line[0], Integer.parseInt(line[1]));
+			if(!lines.isEmpty()) {
+				for (int x = 0; x < lines.size(); x++) {
+					if (x == 0) {
+						DailyCartValue = Float.parseFloat(lines.get(0));
+					} else {
+						line = lines.get(x).split("//");
+						DailyCart.put(line[0], Integer.parseInt(line[1]));
+					}
 				}
 			}
+
 		} finally {
 		}
 
@@ -720,7 +723,7 @@ public class MainWindow extends JFrame implements EventListener {
 		setFont(new Font("Source Code Pro Black", Font.PLAIN, 15));
 		setTitle("Fatura\u00E7\u00E3o");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1280, 800);
+		setBounds(100, 100, 1080, 800);
 		contentPanel = new JPanel();
 		contentPanel.setBackground(Color.LIGHT_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -738,7 +741,7 @@ public class MainWindow extends JFrame implements EventListener {
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(MainPanel, GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
+					.addComponent(MainPanel, GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
 					.addGap(18)
 					.addComponent(TotalPanel, GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
 		);
@@ -748,8 +751,8 @@ public class MainWindow extends JFrame implements EventListener {
 					.addGap(11)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(TotalPanel, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-						.addComponent(MainPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))
-					.addContainerGap(299, Short.MAX_VALUE))
+						.addComponent(MainPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE))
+					.addContainerGap(297, Short.MAX_VALUE))
 		);
 
 		JTabbedPane tabbedPanel = new JTabbedPane(JTabbedPane.TOP);
@@ -1083,39 +1086,24 @@ public class MainWindow extends JFrame implements EventListener {
 
 		JPanel BackScrollPanel = new JPanel();
 		BackScrollPanel.setBorder(null);
-		
-				btnEndDay = new JButton("Fechar Sess\u00E3o");
-		
-				btnOpenDaily = new JButton("Di\u00E1rio");
 		GroupLayout gl_TotalPanel = new GroupLayout(TotalPanel);
 		gl_TotalPanel.setHorizontalGroup(
 			gl_TotalPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_TotalPanel.createSequentialGroup()
-					.addGroup(gl_TotalPanel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_TotalPanel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-							.addComponent(btnEndDay, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_TotalPanel.createSequentialGroup()
-							.addGap(7)
-							.addGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(BackScrollPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
-								.addComponent(TotalBtn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))))
+				.addGroup(gl_TotalPanel.createSequentialGroup()
+					.addGap(7)
+					.addGroup(gl_TotalPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(BackScrollPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+						.addComponent(TotalBtn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_TotalPanel.setVerticalGroup(
 			gl_TotalPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_TotalPanel.createSequentialGroup()
 					.addGap(7)
-					.addComponent(TotalBtn, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+					.addComponent(TotalBtn, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGap(18)
-					.addComponent(BackScrollPanel, GroupLayout.PREFERRED_SIZE, 584, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_TotalPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnEndDay, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+					.addComponent(BackScrollPanel, GroupLayout.PREFERRED_SIZE, 639, GroupLayout.PREFERRED_SIZE)
+					.addGap(291))
 		);
 
 		JScrollPane TotalScroll = new JScrollPane();
@@ -1125,6 +1113,10 @@ public class MainWindow extends JFrame implements EventListener {
 
 		labelPrice = new JLabel("Pre\u00E7o: ");
 		labelPrice.setFont(new Font("Dialog", Font.BOLD, 25));
+
+		btnOpenDaily = new JButton("Di\u00E1rio");
+
+		btnEndDay = new JButton("Fechar Sess\u00E3o");
 		
 		btnCleanCart = new JButton("Limpar Carrinho");
 		
@@ -1133,10 +1125,15 @@ public class MainWindow extends JFrame implements EventListener {
 
 		GroupLayout gl_BackScrollPanel = new GroupLayout(BackScrollPanel);
 		gl_BackScrollPanel.setHorizontalGroup(
-			gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_BackScrollPanel.createSequentialGroup()
+			gl_BackScrollPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_BackScrollPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_BackScrollPanel.createSequentialGroup()
+							.addComponent(btnOpenDaily, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnEndDay, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+							.addContainerGap())
 						.addComponent(TotalScroll, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
 						.addGroup(gl_BackScrollPanel.createSequentialGroup()
 							.addComponent(labelPrice, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
@@ -1155,10 +1152,14 @@ public class MainWindow extends JFrame implements EventListener {
 						.addComponent(btnCleanCart, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnLastBill, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(labelPrice, GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
+					.addComponent(labelPrice, GroupLayout.PREFERRED_SIZE, 29, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(TotalScroll, GroupLayout.PREFERRED_SIZE, 522, GroupLayout.PREFERRED_SIZE)
-					.addGap(319))
+					.addComponent(TotalScroll, GroupLayout.PREFERRED_SIZE, 529, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_BackScrollPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnEndDay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnOpenDaily, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+					.addGap(283))
 		);
 
 		TotalList = new JList();
@@ -1270,15 +1271,12 @@ public class MainWindow extends JFrame implements EventListener {
 
 			UpdateCartVisual();
 			try {
-				FileWriter fw = new FileWriter("Resources/DailyDB.txt");
-				PrintWriter pw = new PrintWriter(fw);
-				pw.println(DailyCartValue.toString());
+				List<String> toSave = new ArrayList<>();
+				toSave.add(DailyCartValue.toString());
 				for (Object key : DailyCart.keySet()) {
-					pw.println(key.toString() + "//" + DailyCart.get(key).toString());
+					toSave.add(key.toString() + "//" + DailyCart.get(key).toString());
 				}
-				fw.close();
-				pw.close();
-				System.out.println("Works");
+				Files.write(Paths.get("Resources", "DailyDB.txt"), toSave);
 			} catch (IOException e) {
 				System.out.println(e);
 			}
@@ -1297,11 +1295,21 @@ public class MainWindow extends JFrame implements EventListener {
 			toSave.add("--Coro do Mosteiro de Grijo--");
 			toSave.add("\n");
 			for (Object key: ShoppingCart.keySet()) {
-				toSave.add("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+				if(!key.toString().contains("Manual")) {
+					toSave.add(ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+				}else {
+					toSave.add(ShoppingCart.get(key.toString().replace("?", euro)).toString() + "X" + key.toString().replace("?", euro));
+				}
+				
 			}
-			toSave.add("\n\nTotal: " + ShoppingCartValue.toString() + euro);
-			toSave.add("\n\n---Obrigado pela Visita---");
-			toSave.add("\n\n" + dateFormat.format(date));
+			toSave.add("\n");
+			toSave.add("Total: " + ShoppingCartValue.toString() + euro);
+			toSave.add("\n");
+			toSave.add("***Nao serve como Fatura!***");
+			toSave.add("\n");
+			toSave.add("---Obrigado pela Visita---");
+			toSave.add("\n");
+			toSave.add(dateFormat.format(date));
 			
 			Files.write(Paths.get("Resources", "LastBill.txt"), toSave);	
 			
@@ -1320,14 +1328,13 @@ public class MainWindow extends JFrame implements EventListener {
 			String text = "";
 			
 			for (int x = 0; x < lines.size(); x++) {
-				text += lines.get(x);
-				text += "\n";
+				text += lines.get(x) + "\n";
 			}
 			
 			if(text != "") {
 				if (JOptionPane.showConfirmDialog(contentPanel, text, "Imprimir Ultima Conta?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					PrinterService ps = new PrinterService();
-					text += "\n \n \n \n \n \n";
+					text += "\n \n \n \n \n";
 					ps.printString(printer, text);
 					
 					byte[] cutP = new byte[] { 0x1d, 'V', 1 };//CUT THE PAPER PREPARATION
@@ -1343,7 +1350,7 @@ public class MainWindow extends JFrame implements EventListener {
 	
 	private void EndOfDay() {
 		DailyPrint();
-		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy HH:mm:ss" + ".txt");
 		Date date = new Date();
 		try {
 			Files.move(Paths.get("Resources", "DailyDB.txt"),
@@ -1353,11 +1360,9 @@ public class MainWindow extends JFrame implements EventListener {
 		}
 
 		try {
-			FileWriter fw = new FileWriter("Resources/DailyDB.txt");
-			PrintWriter pw = new PrintWriter(fw);
-			pw.println("0.0");
-			fw.close();
-			pw.close();
+			List<String> toPrint = new ArrayList<>();
+			toPrint.add("0.0");
+			Files.write(Paths.get("Resources", "DailyDB.txt"), toPrint);
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -1378,18 +1383,23 @@ public class MainWindow extends JFrame implements EventListener {
 	
 	private void BillPrint(){
 		PrinterService ps = new PrinterService();
-		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
 		
 		String toPrint = new String();
-		toPrint +=("--Coro do Mosteiro de Grijo--");
+		toPrint +=("--Coro do Mosteiro de Grijo--\n");
 		for (Object key: ShoppingCart.keySet()) {
-			toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+			if(!key.toString().contains("Manual")) {
+				toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+			}else {
+				toPrint+=("\n" + ShoppingCart.get(key.toString().replace("?", euro)).toString() + "X" + key.toString().replace("?", euro));
+
+			}
 		}
 		toPrint+=("\n \nTotal: " + ShoppingCartValue.toString() + euro);
-		toPrint+=("\n \n---Obrigado pela Visita---");
 		toPrint+=("\n\n***Nao serve como Fatura!***");
-		toPrint+=("\n \n" + dateFormat.format(date) + "\n \n \n \n \n \n");
+		toPrint+=("\n \n---Obrigado pela Visita---");
+		toPrint+=("\n \n" + dateFormat.format(date) + "\n \n \n \n \n");
 		
 		ps.printString(printer, toPrint);
 		
@@ -1409,14 +1419,15 @@ public class MainWindow extends JFrame implements EventListener {
 		toPrint+=("--Coro do Mosteiro de Grijo--");
 		toPrint+=("\n");
 		for (Object key: DailyCart.keySet()) {
-			float total = NamePriceList.get(key) * ShoppingCart.get(key);
-			total = 0;
-			toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + total + euro);
+			float total = NamePriceList.get(key) * DailyCart.get(key);
+			System.out.println(total);
+			toPrint+=("\n" + DailyCart.get(key).toString() + "X" + key + " " + total + euro);
 		}
-		toPrint+=("\n\nTotal: " + ShoppingCartValue.toString() + euro);
+		toPrint+=("\n\nTotal: " + DailyCartValue.toString() + euro);
 		toPrint+=("\n\n---Obrigado pela Visita---");
 		toPrint+=("\n\nDia: " + dateFormat.format(date));
 		toPrint+=("\nHora:" + hourFormat.format(date));
+		toPrint+=("\n \n \n \n \n");
 		
 		ps.printString(printer, toPrint);
 		

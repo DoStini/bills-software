@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.nio.charset.Charset;
 
 import javax.print.Doc;
 import javax.print.DocFlavor;
@@ -56,7 +57,7 @@ public class PrinterService implements Printable{
 	            byte[] bytes;
 
 	            // important for umlaut chars
-	            bytes = text.getBytes("CP437");
+	            bytes = text.getBytes(Charset.forName("UTF-8"));
 
 	            Doc doc = new SimpleDoc(bytes, flavor, null);
 
