@@ -27,6 +27,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -274,7 +275,7 @@ public class MainWindow extends JFrame implements EventListener {
 		btnEndDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (JOptionPane.showConfirmDialog(contentPanel,
-						"Tem a certeza que pretende fechar sess�o? N�o feche antes das 00:00H", "",
+						"Tem a certeza que pretende fechar sessao? Nao feche antes das 00:00H", "",
 						JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					EndOfDay();
 				}
@@ -299,7 +300,7 @@ public class MainWindow extends JFrame implements EventListener {
 				try {
 					AddToCartManual("Manual", Float.parseFloat(price));
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(contentPanel, "O valor que introduziu n�o � v�lido: \n	-Certifique-se que usa apenas n�meros\n	-Certifique-se que usa '.' e n�o ','", "Erro", JOptionPane.OK_OPTION); 
+					JOptionPane.showMessageDialog(contentPanel, "O valor que introduziu nao e valido: \n	-Certifique-se que usa apenas numeros\n	-Certifique-se que usa '.' e nao ','", "Erro", JOptionPane.OK_OPTION); 
 			    }  
 				
 			}
@@ -678,15 +679,17 @@ public class MainWindow extends JFrame implements EventListener {
 		line = null;
 		try {
 			List<String> lines = Files.readAllLines(path);
-
-			for (int x = 0; x < lines.size(); x++) {
-				if (x == 0) {
-					DailyCartValue = Float.parseFloat(lines.get(0));
-				} else {
-					line = lines.get(x).split("//");
-					DailyCart.put(line[0], Integer.parseInt(line[1]));
+			if(!lines.isEmpty()) {
+				for (int x = 0; x < lines.size(); x++) {
+					if (x == 0) {
+						DailyCartValue = Float.parseFloat(lines.get(0));
+					} else {
+						line = lines.get(x).split("//");
+						DailyCart.put(line[0], Integer.parseInt(line[1]));
+					}
 				}
 			}
+
 		} finally {
 		}
 
@@ -1258,15 +1261,12 @@ public class MainWindow extends JFrame implements EventListener {
 
 			UpdateCartVisual();
 			try {
-				FileWriter fw = new FileWriter("Resources/DailyDB.txt");
-				PrintWriter pw = new PrintWriter(fw);
-				pw.println(DailyCartValue.toString());
+				List<String> toSave = new ArrayList<>();
+				toSave.add(DailyCartValue.toString());
 				for (Object key : DailyCart.keySet()) {
-					pw.println(key.toString() + "//" + DailyCart.get(key).toString());
+					toSave.add(key.toString() + "//" + DailyCart.get(key).toString());
 				}
-				fw.close();
-				pw.close();
-				System.out.println("Works");
+				Files.write(Paths.get("Resources", "DailyDB.txt"), toSave);
 			} catch (IOException e) {
 				System.out.println(e);
 			}
@@ -1285,11 +1285,21 @@ public class MainWindow extends JFrame implements EventListener {
 			toSave.add("--Coro do Mosteiro de Grijo--");
 			toSave.add("\n");
 			for (Object key: ShoppingCart.keySet()) {
-				toSave.add("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+				if(!key.toString().contains("Manual")) {
+					toSave.add(ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+				}else {
+					toSave.add(ShoppingCart.get(key.toString().replace("?", euro)).toString() + "X" + key.toString().replace("?", euro));
+				}
+				
 			}
-			toSave.add("\n\nTotal: " + ShoppingCartValue.toString() + euro);
-			toSave.add("\n\n---Obrigado pela Visita---");
-			toSave.add("\n\n" + dateFormat.format(date));
+			toSave.add("\n");
+			toSave.add("Total: " + ShoppingCartValue.toString() + euro);
+			toSave.add("\n");
+			toSave.add("***Nao serve como Fatura!***");
+			toSave.add("\n");
+			toSave.add("---Obrigado pela Visita---");
+			toSave.add("\n");
+			toSave.add(dateFormat.format(date));
 			
 			Files.write(Paths.get("Resources", "LastBill.txt"), toSave);	
 			
@@ -1308,14 +1318,13 @@ public class MainWindow extends JFrame implements EventListener {
 			String text = "";
 			
 			for (int x = 0; x < lines.size(); x++) {
-				text += lines.get(x);
-				text += "\n";
+				text += lines.get(x) + "\n";
 			}
 			
 			if(text != "") {
 				if (JOptionPane.showConfirmDialog(contentPanel, text, "Imprimir Ultima Conta?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					PrinterService ps = new PrinterService();
-					text += "\n \n \n \n \n \n";
+					text += "\n \n \n \n \n";
 					ps.printString(printer, text);
 					
 					byte[] cutP = new byte[] { 0x1d, 'V', 1 };//CUT THE PAPER PREPARATION
@@ -1366,18 +1375,23 @@ public class MainWindow extends JFrame implements EventListener {
 	
 	private void BillPrint(){
 		PrinterService ps = new PrinterService();
-		DateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
 		
 		String toPrint = new String();
-		toPrint +=("--Coro do Mosteiro de Grijo--");
+		toPrint +=("--Coro do Mosteiro de Grijo--\n");
 		for (Object key: ShoppingCart.keySet()) {
-			toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+			if(!key.toString().contains("Manual")) {
+				toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+			}else {
+				toPrint+=("\n" + ShoppingCart.get(key.toString().replace("?", euro)).toString() + "X" + key.toString().replace("?", euro));
+
+			}
 		}
 		toPrint+=("\n \nTotal: " + ShoppingCartValue.toString() + euro);
-		toPrint+=("\n \n---Obrigado pela Visita---");
 		toPrint+=("\n\n***Nao serve como Fatura!***");
-		toPrint+=("\n \n" + dateFormat.format(date) + "\n \n \n \n \n \n");
+		toPrint+=("\n \n---Obrigado pela Visita---");
+		toPrint+=("\n \n" + dateFormat.format(date) + "\n \n \n \n \n");
 		
 		ps.printString(printer, toPrint);
 		
@@ -1397,14 +1411,15 @@ public class MainWindow extends JFrame implements EventListener {
 		toPrint+=("--Coro do Mosteiro de Grijo--");
 		toPrint+=("\n");
 		for (Object key: DailyCart.keySet()) {
-			float total = NamePriceList.get(key) * ShoppingCart.get(key);
-			total = 0;
-			toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + total + euro);
+			float total = NamePriceList.get(key) * DailyCart.get(key);
+			System.out.println(total);
+			toPrint+=("\n" + DailyCart.get(key).toString() + "X" + key + " " + total + euro);
 		}
-		toPrint+=("\n\nTotal: " + ShoppingCartValue.toString() + euro);
+		toPrint+=("\n\nTotal: " + DailyCartValue.toString() + euro);
 		toPrint+=("\n\n---Obrigado pela Visita---");
 		toPrint+=("\n\nDia: " + dateFormat.format(date));
 		toPrint+=("\nHora:" + hourFormat.format(date));
+		toPrint+=("\n \n \n \n \n");
 		
 		ps.printString(printer, toPrint);
 		
