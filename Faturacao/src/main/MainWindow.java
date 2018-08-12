@@ -147,8 +147,29 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton btnBar_15;
 	public JButton btnBar_16;
 	public JButton btnBar_17;
-	public JButton btnBar_18;
+	public JButton btnManual;
 
+	public JButton btnBar2;
+	public JButton btnBar2_0;
+	public JButton btnBar2_1;
+	public JButton btnBar2_2;
+	public JButton btnBar2_3;
+	public JButton btnBar2_4;
+	public JButton btnBar2_5;
+	public JButton btnBar2_6;
+	public JButton btnBar2_7;
+	public JButton btnBar2_8;
+	public JButton btnBar2_9;
+	public JButton btnBar2_10;
+	public JButton btnBar2_11;
+	public JButton btnBar2_12;
+	public JButton btnBar2_13;
+	public JButton btnBar2_14;
+	public JButton btnBar2_15;
+	public JButton btnBar2_16;
+	public JButton btnBar2_17;
+	public JButton btnBar2_18;
+	
 	public JPanel SnackPanel;
 	public JButton btnSnack;
 	public JButton btnSnack_0;
@@ -169,7 +190,7 @@ public class MainWindow extends JFrame implements EventListener {
 	public JButton btnSnack_15;
 	public JButton btnSnack_16;
 	public JButton btnSnack_17;
-	public JButton btnManual;
+	public JButton btnSnack_18;
 	public JPanel KitchenPanel;
 
 	public JButton btnKitchen;
@@ -203,7 +224,8 @@ public class MainWindow extends JFrame implements EventListener {
 	public String path;
 
 	
-	private PrintService printer;
+	public PrintService printer;
+
 
 	
 
@@ -400,12 +422,111 @@ public class MainWindow extends JFrame implements EventListener {
 			public void actionPerformed(ActionEvent e) {
 				AddToCart(NameList.get("btnBar_17"), PriceList.get("btnBar_17"));
 			}
-		});
-		btnBar_18.addActionListener(new ActionListener() {
+		});	
+		
+		
+		btnBar2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddToCart(NameList.get("btnBar_18"), PriceList.get("btnBar_18"));
+				AddToCart(NameList.get("btnBar2"), PriceList.get("btnBar2"));
 			}
 		});
+		btnBar2_0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_0"), PriceList.get("btnBar2_0"));
+			}
+		});
+		btnBar2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_1"), PriceList.get("btnBar2_1"));
+			}
+		});
+		btnBar2_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_2"), PriceList.get("btnBar2_2"));
+			}
+		});
+		btnBar2_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_3"), PriceList.get("btnBar2_3"));
+			}
+		});
+		btnBar2_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_4"), PriceList.get("btnBar2_4"));
+			}
+		});
+		btnBar2_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_5"), PriceList.get("btnBar2_5"));
+			}
+		});
+		btnBar2_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_6"), PriceList.get("btnBar2_6"));
+			}
+		});
+		btnBar2_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_7"), PriceList.get("btnBar2_7"));
+			}
+		});
+		btnBar2_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_8"), PriceList.get("btnBar2_8"));
+			}
+		});
+		btnBar2_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_9"), PriceList.get("btnBar2_9"));
+			}
+		});
+		btnBar2_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_10"), PriceList.get("btnBar2_10"));
+			}
+		});
+		btnBar2_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_11"), PriceList.get("btnBar2_11"));
+			}
+		});
+		btnBar2_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_12"), PriceList.get("btnBar2_12"));
+			}
+		});
+		btnBar2_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_13"), PriceList.get("btnBar2_13"));
+			}
+		});
+		btnBar2_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_14"), PriceList.get("btnBar2_14"));
+			}
+		});
+		btnBar2_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_15"), PriceList.get("btnBar2_15"));
+			}
+		});
+		btnBar2_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_16"), PriceList.get("btnBar2_16"));
+			}
+		});
+		btnBar2_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar2_17"), PriceList.get("btnBar2_17"));
+			}
+		});
+		btnBar2_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(PriceList.get("btnBar2_18"));
+				AddToCart(NameList.get("btnBar2_18"), PriceList.get("btnBar2_18"));
+			}
+		});	
+
 		
 		btnSnack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -502,7 +623,12 @@ public class MainWindow extends JFrame implements EventListener {
 				AddToCart(NameList.get("btnSnack_17"), PriceList.get("btnSnack_17"));
 			}
 		});
-
+		btnSnack_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddToCart(NameList.get("btnBar_18"), PriceList.get("btnBar_18"));
+			}
+		});
+		
 		
 		btnKitchen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -630,8 +756,28 @@ public class MainWindow extends JFrame implements EventListener {
 		Buttons.put("btnBar_15", btnBar_15);
 		Buttons.put("btnBar_16", btnBar_16);
 		Buttons.put("btnBar_17", btnBar_17);
-		Buttons.put("btnBar_18", btnBar_18);
 
+		Buttons.put("btnBar2", btnBar2);
+		Buttons.put("btnBar2_0", btnBar2_0);
+		Buttons.put("btnBar2_1", btnBar2_1);
+		Buttons.put("btnBar2_2", btnBar2_2);
+		Buttons.put("btnBar2_3", btnBar2_3);
+		Buttons.put("btnBar2_4", btnBar2_4);
+		Buttons.put("btnBar2_5", btnBar2_5);
+		Buttons.put("btnBar2_6", btnBar2_6);
+		Buttons.put("btnBar2_7", btnBar2_7);
+		Buttons.put("btnBar2_8", btnBar2_8);
+		Buttons.put("btnBar2_9", btnBar2_9);
+		Buttons.put("btnBar2_10", btnBar2_10);
+		Buttons.put("btnBar2_11", btnBar2_11);
+		Buttons.put("btnBar2_12", btnBar2_12);
+		Buttons.put("btnBar2_13", btnBar2_13);
+		Buttons.put("btnBar2_14", btnBar2_14);
+		Buttons.put("btnBar2_15", btnBar2_15);
+		Buttons.put("btnBar2_16", btnBar2_16);
+		Buttons.put("btnBar2_17", btnBar2_17);
+		Buttons.put("btnBar2_18", btnBar2_18);
+		
 		Buttons.put("btnSnack", btnSnack);
 		Buttons.put("btnSnack_0", btnSnack_0);
 		Buttons.put("btnSnack_1", btnSnack_1);
@@ -651,6 +797,7 @@ public class MainWindow extends JFrame implements EventListener {
 		Buttons.put("btnSnack_15", btnSnack_15);
 		Buttons.put("btnSnack_16", btnSnack_16);
 		Buttons.put("btnSnack_17", btnSnack_17);
+		Buttons.put("btnSnack_18", btnSnack_18);
 
 		Buttons.put("btnKitchen", btnKitchen);
 		Buttons.put("btnKitchen_0", btnKitchen_0);
@@ -723,7 +870,7 @@ public class MainWindow extends JFrame implements EventListener {
 		setFont(new Font("Source Code Pro Black", Font.PLAIN, 15));
 		setTitle("Fatura\u00E7\u00E3o");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1280, 800);
+		setBounds(10, 10, 1200, 800);
 		contentPanel = new JPanel();
 		contentPanel.setBackground(Color.LIGHT_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -767,110 +914,213 @@ public class MainWindow extends JFrame implements EventListener {
 				gl_MainPanel.createSequentialGroup().addContainerGap()
 						.addComponent(tabbedPanel, GroupLayout.DEFAULT_SIZE, 967, Short.MAX_VALUE).addContainerGap()));
 
-		JPanel BarPanel = new JPanel();
-		tabbedPanel.addTab("Bar", null, BarPanel, null);
-		BarPanel.setLayout(new GridLayout(0, 5, 5, 5));
+		JPanel Bar1Panel = new JPanel();
+		tabbedPanel.addTab("Bar Simples", null, Bar1Panel, null);
+		Bar1Panel.setLayout(new GridLayout(0, 5, 5, 5));
 
 		btnBar = new JButton("");
 		btnBar.setEnabled(false);
 		btnBar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar);
+		Bar1Panel.add(btnBar);
 
 		btnBar_0 = new JButton("");
 		btnBar_0.setEnabled(false);
 		btnBar_0.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_0);
+		Bar1Panel.add(btnBar_0);
 
 		btnBar_1 = new JButton("");
 		btnBar_1.setEnabled(false);
 		btnBar_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_1);
+		Bar1Panel.add(btnBar_1);
 
 		btnBar_2 = new JButton("");
 		btnBar_2.setEnabled(false);
 		btnBar_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_2);
+		Bar1Panel.add(btnBar_2);
 
 		btnBar_3 = new JButton("");
 		btnBar_3.setEnabled(false);
 		btnBar_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_3);
+		Bar1Panel.add(btnBar_3);
 
 		btnBar_4 = new JButton("");
 		btnBar_4.setEnabled(false);
 		btnBar_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_4);
+		Bar1Panel.add(btnBar_4);
 
 		btnBar_5 = new JButton("");
 		btnBar_5.setEnabled(false);
 		btnBar_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_5);
+		Bar1Panel.add(btnBar_5);
 
 		btnBar_6 = new JButton("");
 		btnBar_6.setEnabled(false);
 		btnBar_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_6);
+		Bar1Panel.add(btnBar_6);
 
 		btnBar_7 = new JButton("");
 		btnBar_7.setEnabled(false);
 		btnBar_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_7);
+		Bar1Panel.add(btnBar_7);
 
 		btnBar_8 = new JButton("");
 		btnBar_8.setEnabled(false);
 		btnBar_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_8);
+		Bar1Panel.add(btnBar_8);
 
 		btnBar_9 = new JButton("");
 		btnBar_9.setEnabled(false);
 		btnBar_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_9);
+		Bar1Panel.add(btnBar_9);
 
 		btnBar_10 = new JButton("");
 		btnBar_10.setEnabled(false);
 		btnBar_10.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_10);
+		Bar1Panel.add(btnBar_10);
 
 		btnBar_11 = new JButton("");
 		btnBar_11.setEnabled(false);
 		btnBar_11.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_11);
+		Bar1Panel.add(btnBar_11);
 
 		btnBar_12 = new JButton("");
 		btnBar_12.setEnabled(false);
 		btnBar_12.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_12);
+		Bar1Panel.add(btnBar_12);
 
 		btnBar_13 = new JButton("");
 		btnBar_13.setEnabled(false);
 		btnBar_13.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_13);
+		Bar1Panel.add(btnBar_13);
 
 		btnBar_14 = new JButton("");
 		btnBar_14.setEnabled(false);
 		btnBar_14.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_14);
+		Bar1Panel.add(btnBar_14);
 
 		btnBar_15 = new JButton("");
 		btnBar_15.setEnabled(false);
 		btnBar_15.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_15);
+		Bar1Panel.add(btnBar_15);
 
 		btnBar_16 = new JButton("");
 		btnBar_16.setEnabled(false);
 		btnBar_16.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_16);
+		Bar1Panel.add(btnBar_16);
 
 		btnBar_17 = new JButton("");
 		btnBar_17.setEnabled(false);
 		btnBar_17.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_17);
+		Bar1Panel.add(btnBar_17);
 
-		btnBar_18 = new JButton("");
-		btnBar_18.setEnabled(false);
+		btnManual = new JButton("Manual");
 
-		btnBar_18.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		BarPanel.add(btnBar_18);
+		btnManual.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		Bar1Panel.add(btnManual);
+		
+		JPanel Bar2Panel = new JPanel();
+		tabbedPanel.addTab("      Bar     ", null, Bar2Panel, null);
+		Bar2Panel.setLayout(new GridLayout(0, 5, 5, 5));
+		
+		btnBar2 = new JButton("");
+		btnBar2.setEnabled(false);
+		btnBar2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		Bar2Panel.add(btnBar2);
+		
+		btnBar2_0 = new JButton("");
+		btnBar2_0.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_0.setEnabled(false);
+		Bar2Panel.add(btnBar2_0);
+		
+		btnBar2_1 = new JButton("");
+		btnBar2_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_1.setEnabled(false);
+		Bar2Panel.add(btnBar2_1);
+		
+		btnBar2_2 = new JButton("");
+		btnBar2_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_2.setEnabled(false);
+		Bar2Panel.add(btnBar2_2);
+		
+		btnBar2_3 = new JButton("");
+		btnBar2_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_3.setEnabled(false);
+		Bar2Panel.add(btnBar2_3);
+		
+		btnBar2_4 = new JButton("");
+		btnBar2_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_4.setEnabled(false);
+		Bar2Panel.add(btnBar2_4);
+		
+		btnBar2_5 = new JButton("");
+		btnBar2_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_5.setEnabled(false);
+		Bar2Panel.add(btnBar2_5);
+		
+		btnBar2_6 = new JButton("");
+		btnBar2_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_6.setEnabled(false);
+		Bar2Panel.add(btnBar2_6);
+		
+		btnBar2_7 = new JButton("");
+		btnBar2_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_7.setEnabled(false);
+		Bar2Panel.add(btnBar2_7);
+		
+		btnBar2_8 = new JButton("");
+		btnBar2_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_8.setEnabled(false);
+		Bar2Panel.add(btnBar2_8);
+		
+		btnBar2_9 = new JButton("");
+		btnBar2_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_9.setEnabled(false);
+		Bar2Panel.add(btnBar2_9);
+		
+		btnBar2_10 = new JButton("");
+		btnBar2_10.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_10.setEnabled(false);
+		Bar2Panel.add(btnBar2_10);
+		
+		btnBar2_11 = new JButton("");
+		btnBar2_11.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_11.setEnabled(false);
+		Bar2Panel.add(btnBar2_11);
+		
+		btnBar2_12 = new JButton("");
+		btnBar2_12.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_12.setEnabled(false);
+		Bar2Panel.add(btnBar2_12);
+		
+		btnBar2_13 = new JButton("");
+		btnBar2_13.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_13.setEnabled(false);
+		Bar2Panel.add(btnBar2_13);
+		
+		btnBar2_14 = new JButton("");
+		btnBar2_14.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_14.setEnabled(false);
+		Bar2Panel.add(btnBar2_14);
+		
+		btnBar2_15 = new JButton("");
+		btnBar2_15.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_15.setEnabled(false);
+		Bar2Panel.add(btnBar2_15);
+		
+		btnBar2_16 = new JButton("");
+		btnBar2_16.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_16.setEnabled(false);
+		Bar2Panel.add(btnBar2_16);
+		
+		btnBar2_17 = new JButton("");
+		btnBar2_17.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_17.setEnabled(false);
+		Bar2Panel.add(btnBar2_17);
+		
+		btnBar2_18 = new JButton("");
+		btnBar2_18.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBar2_18.setEnabled(false);
+		Bar2Panel.add(btnBar2_18);
 
 		SnackPanel = new JPanel();
 		tabbedPanel.addTab("Snack", null, SnackPanel, null);
@@ -971,9 +1221,10 @@ public class MainWindow extends JFrame implements EventListener {
 		btnSnack_17.setEnabled(false);
 		SnackPanel.add(btnSnack_17);
 
-		btnManual = new JButton("Manual");
-		btnManual.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		SnackPanel.add(btnManual);
+		btnSnack_18 = new JButton("");
+		btnSnack_18.setEnabled(false);
+		btnSnack_18.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		SnackPanel.add(btnSnack_18);
 
 		KitchenPanel = new JPanel();
 		tabbedPanel.addTab("Cozinha", null, KitchenPanel, null);
@@ -1183,9 +1434,9 @@ public class MainWindow extends JFrame implements EventListener {
 		TotalPanel.setLayout(gl_TotalPanel);
 		contentPanel.setLayout(gl_contentPanel);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { contentPanel, MainPanel, tabbedPanel,
-				BarPanel, btnBar, btnBar_0, btnBar_1, btnBar_2, btnBar_3, btnBar_4, btnBar_5, btnBar_6, btnBar_7,
+				Bar1Panel, btnBar, btnBar_0, btnBar_1, btnBar_2, btnBar_3, btnBar_4, btnBar_5, btnBar_6, btnBar_7,
 				btnBar_8, btnBar_9, btnBar_10, btnBar_11, btnBar_12, btnBar_13, btnBar_14, btnBar_15, btnBar_16,
-				btnBar_17, btnBar_18, TotalPanel, BackScrollPanel, TotalScroll, TotalList, TotalBtn }));
+				btnBar_17, btnManual, TotalPanel, BackScrollPanel, TotalScroll, TotalList, TotalBtn }));
 
 	}
 	
@@ -1218,10 +1469,8 @@ public class MainWindow extends JFrame implements EventListener {
 		System.out.println(ShoppingCartValue);
 		System.out.println("Formated: " + priceFormat.format(ShoppingCartValue));
 		if(priceFormat.format(ShoppingCartValue).contains(",")) {
-			System.out.println("If");
 			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue).replace(",", "."));
 		} else {
-			System.out.println("Else");
 			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
 		}
 		
@@ -1238,10 +1487,8 @@ public class MainWindow extends JFrame implements EventListener {
 			ShoppingCartValue += price;
 		}
 		if(priceFormat.format(ShoppingCartValue).contains(",")) {
-			System.out.println("If");
 			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue).replace(",", "."));
 		} else {
-			System.out.println("Else");
 			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
 		}
 		UpdateCartVisual();
@@ -1265,18 +1512,15 @@ public class MainWindow extends JFrame implements EventListener {
 			}
 
 			if(priceFormat.format(ShoppingCartValue).contains(",")) {
-				System.out.println("If");
 				ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue).replace(",", "."));
 			} else {
-				System.out.println("Else");
 				ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
 			}
 			UpdateCartVisual();
 		}
 	}
 	
-	private void Total() {
-		
+	private void Total() {	
 		if(!ShoppingCart.isEmpty()) {
 			SaveBill();
 			BillPrint();
@@ -1351,9 +1595,7 @@ public class MainWindow extends JFrame implements EventListener {
 	}
 	
 	private void AccessLastBill() {	
-		try {
-			System.out.println("Accessing");
-			
+		try {			
 			Path path = Paths.get("Resources", "LastBill.txt");
 			List<String> lines = Files.readAllLines(path);
 			String text = "";
@@ -1391,11 +1633,9 @@ public class MainWindow extends JFrame implements EventListener {
 		}
 
 		try {
-			FileWriter fw = new FileWriter("Resources/DailyDB.txt");
-			PrintWriter pw = new PrintWriter(fw);
-			pw.println("0.0");
-			fw.close();
-			pw.close();
+			List<String> toPrint = new ArrayList<>();
+			toPrint.add("0.0");
+			Files.write(Paths.get("Resources", "DailyDB.txt"), toPrint);
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -1416,14 +1656,17 @@ public class MainWindow extends JFrame implements EventListener {
 	
 	private void BillPrint(){
 		PrinterService ps = new PrinterService();
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
 		
 		String toPrint = new String();
 		toPrint +=("--Coro do Mosteiro de Grijo--\n");
 		for (Object key: ShoppingCart.keySet()) {
 			if(!key.toString().contains("Manual")) {
-				toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+				System.out.println(key);
+				System.out.println(NamePriceList.get(key));
+				float total = NamePriceList.get(key) * ShoppingCart.get(key);
+				toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + total + euro);
 			}else {
 				toPrint+=("\n" + ShoppingCart.get(key.toString().replace("?", euro)).toString() + "X" + key.toString().replace("?", euro));
 
@@ -1452,9 +1695,14 @@ public class MainWindow extends JFrame implements EventListener {
 		toPrint+=("--Coro do Mosteiro de Grijo--");
 		toPrint+=("\n");
 		for (Object key: DailyCart.keySet()) {
-			float total = NamePriceList.get(key) * DailyCart.get(key);
-			System.out.println(total);
-			toPrint+=("\n" + DailyCart.get(key).toString() + "X" + key + " " + total + euro);
+			if(!key.toString().contains("Manual")) {
+				float total = NamePriceList.get(key) * DailyCart.get(key);
+				System.out.println(total);
+				toPrint+=("\n" + DailyCart.get(key).toString() + "X" + key + " " + total + euro);
+			}else {
+				String price = key.toString().split(" ")[1].replace(euro, "");
+			}
+
 		}
 		toPrint+=("\n\nTotal: " + DailyCartValue.toString() + euro);
 		toPrint+=("\n\n---Obrigado pela Visita---");
