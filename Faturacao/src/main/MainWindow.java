@@ -203,7 +203,7 @@ public class MainWindow extends JFrame implements EventListener {
 	public String path;
 
 	
-	private PrintService printer;
+	private String printer;
 
 	
 
@@ -1186,7 +1186,7 @@ public class MainWindow extends JFrame implements EventListener {
             try {
 				if (printers[x].getName().toLowerCase().indexOf(Files.readAllLines(Paths.get("Resources", "Printer.txt")).get(0).toLowerCase()) >= 0) {
 					System.out.println("Good");
-				    printer = printers[x];
+				    printer = printers[x].getName();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -1254,7 +1254,7 @@ public class MainWindow extends JFrame implements EventListener {
 				}
 			}
 			DailyCartValue += ShoppingCartValue;
-			DailyCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+			DailyCartValue = Float.parseFloat(priceFormat.format(DailyCartValue));
 			ShoppingCart.clear();
 			ModelTotal.clear();
 			ShoppingCartValue = 0.0f;
@@ -1396,7 +1396,7 @@ public class MainWindow extends JFrame implements EventListener {
 		ps.printString(printer, toPrint);
 		
 		byte[] cutP = new byte[] { 0x1d, 'V', 1 };//CUT THE PAPER PREPARATION
-		ps.printBytes(printer, cutP); //CUT THAT SHIIIIT
+//		ps.printBytes(printer, cutP); //CUT THAT SHIIIIT
 		
 	}
 	
@@ -1424,6 +1424,6 @@ public class MainWindow extends JFrame implements EventListener {
 		ps.printString(printer, toPrint);
 		
 		byte[] cutP = new byte[] { 0x1d, 'V', 1 };//CUT THE PAPER PREPARATION
-		ps.printBytes(printer, cutP); //CUT THAT SHIIIIT
+		//ps.printBytes(printer, cutP); //CUT THAT SHIIIIT
 	}
 }
