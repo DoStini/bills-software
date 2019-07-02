@@ -1450,7 +1450,7 @@ public class MainWindow extends JFrame implements EventListener {
             	String name = Files.readAllLines(Paths.get("Resources", "Printer.txt")).get(0).toLowerCase();
 				if (printers[x].getName().toLowerCase().indexOf(name) >= 0) {
 					System.out.println("Good");
-				    printer = printers[x];
+				    printer = printers[x].getName();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
