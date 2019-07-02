@@ -224,7 +224,7 @@ public class MainWindow extends JFrame implements EventListener {
 	public String path;
 
 	
-	public PrintService printer;
+	public String printer;
 
 
 	

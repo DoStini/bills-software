@@ -1,12 +1,11 @@
-package main;
-
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
-import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.print.Doc;
 import javax.print.DocFlavor;
@@ -17,80 +16,106 @@ import javax.print.SimpleDoc;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 
-public class PrinterService implements Printable{
+public class PrinterService implements Printable {
 
-	   @Override
-	    public int print(Graphics g, PageFormat pf, int page)
-	            throws PrinterException {
-	        if (page > 0) { /* We have only one page, and 'page' is zero-based */
-	            return NO_SUCH_PAGE;
-	        }
+    public List<String> getPrinters(){
 
-	        /*
-	         * User (0,0) is typically outside the imageable area, so we must
-	         * translate by the X and Y values in the PageFormat to avoid clipping
-	         */
-	        Graphics2D g2d = (Graphics2D) g;
-	        g2d.translate(pf.getImageableX(), pf.getImageableY());
-	        /* Now we perform our rendering */
+        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
 
-	        g.setFont(new Font("Roman", 0, 30));
-	        g.drawString("Hello world !", 0, 10);
+        PrintService printServices[] = PrintServiceLookup.lookupPrintServices(
+                flavor, pras);
 
-	        return PAGE_EXISTS;
-	    }
+        List<String> printerList = new ArrayList<String>();
+        for(PrintService printerService: printServices){
+            printerList.add( printerService.getName());
+        }
 
-	    public void printString(PrintService printer, String text) {
+        return printerList;
+    }
 
-	        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-	    	
-	        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
-	        
-	        
-	        
-	        PrintService service = printer;
+    @Override
+    public int print(Graphics g, PageFormat pf, int page)
+            throws PrinterException {
+        if (page > 0) { /* We have only one page, and 'page' is zero-based */
+            return NO_SUCH_PAGE;
+        }
 
-	        DocPrintJob job = service.createPrintJob();
+        /*
+         * User (0,0) is typically outside the imageable area, so we must
+         * translate by the X and Y values in the PageFormat to avoid clipping
+         */
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.translate(pf.getImageableX(), pf.getImageableY());
+        /* Now we perform our rendering */
 
-	        try {
+        g.setFont(new Font("Roman", 0, 8));
+        g.drawString("Hello world !", 0, 10);
 
-	            byte[] bytes;
+        return PAGE_EXISTS;
+    }
 
-	            // important for umlaut chars
-	            bytes = text.getBytes(Charset.forName("UTF-8"));
+    public void printString(String printerName, String text) {
 
-	            Doc doc = new SimpleDoc(bytes, flavor, null);
+        // find the printService of name printerName
+        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
 
-	            
-	            job.print(doc, null);
+        PrintService printService[] = PrintServiceLookup.lookupPrintServices(
+                flavor, pras);
+        PrintService service = findPrintService(printerName, printService);
 
-	        } catch (Exception e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }
+        DocPrintJob job = service.createPrintJob();
 
-	    }
+        try {
 
-	    public void printBytes(PrintService printer, byte[] bytes) {
+            byte[] bytes;
 
-	        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-	        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+            // important for umlaut chars
+            bytes = text.getBytes("CP437");
 
-	        PrintService printService[] = PrintServiceLookup.lookupPrintServices(
-	                flavor, pras);
-	        PrintService service = printer;
+            Doc doc = new SimpleDoc(bytes, flavor, null);
 
-	        DocPrintJob job = service.createPrintJob();
 
-	        try {
+            job.print(doc, null);
 
-	            Doc doc = new SimpleDoc(bytes, flavor, null);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-	            job.print(doc, null);
+    }
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	    }
-	
+    public void printBytes(String printerName, byte[] bytes) {
+
+        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+        PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+
+        PrintService printService[] = PrintServiceLookup.lookupPrintServices(
+                flavor, pras);
+        PrintService service = findPrintService(printerName, printService);
+
+        DocPrintJob job = service.createPrintJob();
+
+        try {
+
+            Doc doc = new SimpleDoc(bytes, flavor, null);
+
+            job.print(doc, null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private PrintService findPrintService(String printerName,
+            PrintService[] services) {
+        for (PrintService service : services) {
+            if (service.getName().equalsIgnoreCase(printerName)) {
+                return service;
+            }
+        }
+
+        return null;
+    }
 }
