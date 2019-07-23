@@ -1197,12 +1197,12 @@ public class MainWindow extends JFrame implements EventListener {
 	private void AddToCart(String name, Float price) {
 		if (!ShoppingCart.containsKey(name)) {
 			ShoppingCart.put(name, 1);
-			ShoppingCartValue += price;
+			ShoppingCartValue += Float.parseFloat(priceFormat.format(price).replace(",", "."));
 		} else {
 			ShoppingCart.put(name, ShoppingCart.get(name) + 1);
-			ShoppingCartValue += price;
+			ShoppingCartValue += Float.parseFloat(priceFormat.format(price).replace(",", "."));
 		}
-		ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+		ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue).replace(",", "."));
 		UpdateCartVisual();
 	}
 	
@@ -1210,10 +1210,10 @@ public class MainWindow extends JFrame implements EventListener {
 		if (!ShoppingCart.containsKey(name + " "+ price.toString() + euro)) {
 			ShoppingCart.put(name + " "+ price.toString() + euro, 1);
 			ManualPriceList.put(name + " "+ price.toString() + euro, price);
-			ShoppingCartValue += price;
+			ShoppingCartValue += Float.parseFloat(priceFormat.format(price));;
 		} else {
 			ShoppingCart.put(name + " "+ price.toString() + euro, ShoppingCart.get(name + " "+ price.toString() + euro) + 1);
-			ShoppingCartValue += price;
+			ShoppingCartValue += Float.parseFloat(priceFormat.format(price));;
 		}
 		ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
 		UpdateCartVisual();
@@ -1225,9 +1225,9 @@ public class MainWindow extends JFrame implements EventListener {
 		if (JOptionPane.showConfirmDialog(contentPanel, "Remover item: " + item + "?", "",
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			if (NamePriceList.containsKey(item)) {
-				ShoppingCartValue -= NamePriceList.get(item);
+				ShoppingCartValue -= Float.parseFloat(priceFormat.format(NamePriceList.get(item)).replace(",", "."));
 			} else {
-				ShoppingCartValue -= ManualPriceList.get(item);
+				ShoppingCartValue -= Float.parseFloat(priceFormat.format(ManualPriceList.get(item)).replace(",", "."));
 			}
 			
 			if (ShoppingCart.get(item) == 1) {
@@ -1236,7 +1236,7 @@ public class MainWindow extends JFrame implements EventListener {
 				ShoppingCart.put(item, ShoppingCart.get(item) - 1);
 			}
 
-			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue));
+			ShoppingCartValue = Float.parseFloat(priceFormat.format(ShoppingCartValue).replace(",", "."));
 			UpdateCartVisual();
 		}
 	}
@@ -1253,8 +1253,8 @@ public class MainWindow extends JFrame implements EventListener {
 					DailyCart.put(key.toString(), DailyCart.get(key) + ShoppingCart.get(key));
 				}
 			}
-			DailyCartValue += ShoppingCartValue;
-			DailyCartValue = Float.parseFloat(priceFormat.format(DailyCartValue));
+			DailyCartValue += Float.parseFloat(priceFormat.format(ShoppingCartValue).replace(",", "."));
+			DailyCartValue = Float.parseFloat(priceFormat.format(DailyCartValue).replace(",", "."));
 			ShoppingCart.clear();
 			ModelTotal.clear();
 			ShoppingCartValue = 0.0f;
@@ -1388,7 +1388,7 @@ public class MainWindow extends JFrame implements EventListener {
 
 			}
 		}
-		toPrint+=("\n \n         Total: " + ShoppingCartValue.toString() + euro);
+		toPrint+=("\n \n         Total: " + ShoppingCartValue.toString() + "Euro");
 		toPrint+=("\n\n         ***Nao serve como Fatura!***");
 		toPrint+=("\n \n         ----Obrigado pela Visita----");
 		toPrint+=("\n \n         " + dateFormat.format(date) + "\n \n \n \n \n");
