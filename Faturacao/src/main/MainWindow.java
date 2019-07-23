@@ -1379,24 +1379,23 @@ public class MainWindow extends JFrame implements EventListener {
 		Date date = new Date();
 		
 		String toPrint = new String();
-		toPrint +=("--Coro do Mosteiro de Grijo--\n");
+		toPrint +=("         --Coro do Mosteiro de Grijo--\n");
 		for (Object key: ShoppingCart.keySet()) {
 			if(!key.toString().contains("Manual")) {
-				toPrint+=("\n" + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
+				toPrint+=("\n         " + ShoppingCart.get(key).toString() + "X" + key + " " + NamePriceList.get(key).toString() + euro);
 			}else {
-				toPrint+=("\n" + ShoppingCart.get(key.toString().replace("?", euro)).toString() + "X" + key.toString().replace("?", euro));
+				toPrint+=("\n         " + ShoppingCart.get(key.toString().replace("?", euro)).toString() + "X" + key.toString().replace("?", euro));
 
 			}
 		}
-		toPrint+=("\n \nTotal: " + ShoppingCartValue.toString() + euro);
-		toPrint+=("\n\n***Nao serve como Fatura!***");
-		toPrint+=("\n \n---Obrigado pela Visita---");
-		toPrint+=("\n \n" + dateFormat.format(date) + "\n \n \n \n \n");
+		toPrint+=("\n \n         Total: " + ShoppingCartValue.toString() + euro);
+		toPrint+=("\n\n         ***Nao serve como Fatura!***");
+		toPrint+=("\n \n         ----Obrigado pela Visita----");
+		toPrint+=("\n \n         " + dateFormat.format(date) + "\n \n \n \n \n");
 		
 		ps.printString(printer, toPrint);
-		
-		byte[] cutP = new byte[] { 0x1d, 'V', 1 };//CUT THE PAPER PREPARATION
-//		ps.printBytes(printer, cutP); //CUT THAT SHIIIIT
+		byte[] cutP = new byte[] {29, 86, 1};//CUT THE PAPER PREPARATION
+		ps.printBytes(printer, cutP); //CUT THAT SHIIIIT
 		
 	}
 	
@@ -1416,7 +1415,6 @@ public class MainWindow extends JFrame implements EventListener {
 			toPrint+=("\n" + DailyCart.get(key).toString() + "X" + key + " " + total + euro);
 		}
 		toPrint+=("\n\nTotal: " + DailyCartValue.toString() + euro);
-		toPrint+=("\n\n---Obrigado pela Visita---");
 		toPrint+=("\n\nDia: " + dateFormat.format(date));
 		toPrint+=("\nHora:" + hourFormat.format(date));
 		toPrint+=("\n \n \n \n \n");
