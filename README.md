@@ -17,3 +17,4 @@ I'll keep updated executables updated in master branch.
 ## Warnings
 This software doesn't do any taxes and legislation
 ## License
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
