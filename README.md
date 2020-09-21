@@ -8,6 +8,25 @@ I'll keep updated executables updated in master branch.
  1. Download executable folder
  2. Execute Printer chooser to setup the printer. Using a POS Printer is ideal, but works with any kind.
  3. Execute faturacao to initialize the software.
+
+## Editing the items
+There is no graphical way to edit the shop.
+ 1. Open the executable folder
+ 2. Open Resources/DB.txt
+The file looks like this
+
+```
+btnID//The thing//Price
+
+btnBar//Elemento 1//1.0
+btnBar_0//Elemento 2//1.0
+btnBar_1//NULL//0.0
+...
+btnSnack//Snack//1.0
+btnSnack_0//Snack 2//3.0
+```
+In order to change something, just modify the name to the thing you want and change the price
+
 ## Usage
  
  - If the program crashes, it autosaves the current day's earnings.
