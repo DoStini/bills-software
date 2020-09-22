@@ -1,5 +1,6 @@
 # Billing Software
-This project was made with java using javaFX framework.
+Please note this was a very begginner project with very little knowledge of programming.
+This project was made with java using java swing and java awt framework.
 It was used to help out a small institution in a summer fair, to calculate and print bills. 
 
 ## Instalation
